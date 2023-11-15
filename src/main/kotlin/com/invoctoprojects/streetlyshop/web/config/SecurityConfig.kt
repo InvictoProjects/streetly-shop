@@ -1,13 +1,18 @@
 package com.invoctoprojects.streetlyshop.web.config
 
+import com.invoctoprojects.streetlyshop.persistence.domain.customer.Role
 import com.invoctoprojects.streetlyshop.web.filter.JWTAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import javax.servlet.http.HttpServletRequest
 
 @Configuration
 class SecurityConfig {
@@ -41,8 +46,26 @@ class SecurityConfig {
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
 
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        return DefaultCorsConfigurationSource()
+    }
+
     companion object {
         const val JWT_HEADER = "Authorization"
     }
 }
 
+class DefaultCorsConfigurationSource : CorsConfigurationSource {
+    override fun getCorsConfiguration(request: HttpServletRequest): CorsConfiguration {
+        val config = CorsConfiguration()
+        config.allowedOrigins = listOf("*")
+        config.allowedMethods = listOf("*")
+        config.allowedHeaders = listOf("*")
+        config.exposedHeaders = listOf("*")
+        config.maxAge = 3600
+
+        return config
+    }
+
+}
