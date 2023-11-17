@@ -45,4 +45,9 @@ class LoginService(
             .build()
     }
 
+    fun refresh(userId: ObjectId, refreshToken: String): LoginResponse {
+        jwtService.validateRefreshToken(userId, refreshToken)
+        val user = customerRepository.getById(userId)
+        return LoginResponse(jwtService.generateAccessToken(user))
+    }
 }
