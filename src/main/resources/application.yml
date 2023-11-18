@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2client:
+      registration:
+        google:
+          client-id: 366260325335-spab2fbmuguhksr0ggiphkkgmon1bc8k.apps.googleusercontent.com
+          client-secret: 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
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  data:
+    mongodb:
+      uri: mongodb+srv://mongouser:15032002@monomarketcluster.ygdwjp2.mongodb.net/?retryWrites=true&w=majority
+      database: monomarket
+
+
+jwt:
+  secret: Xh0LagoOTKRh086LeHLc7zaOVX0Tobd16SRJ5HVp3CI1tUtThD6jLiqMtua6sZMcMBJc7NtW7rLV7Ncd
+  access:
+    expiration: 43200000
+  refresh:
+    expiration: 86400000
+
+mongodb:
+  collection:
+    customers: customers
+
+server:
+  port: 80
