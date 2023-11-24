@@ -26,4 +26,11 @@ class CustomerController(
         customerService.register(registerRequest.email!!, registerRequest.password!!)
     }
 
+    @ApiOperation("Update customer details")
+    @PutMapping
+    fun updateDetails(@Valid @RequestBody updateRequest: UpdateCustomerDetailsRequest) {
+        val userId = authenticationFacade.getAuthentication().name
+        customerService.updateDetails(ObjectId(userId), updateRequest)
+    }
+
 }
