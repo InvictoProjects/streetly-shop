@@ -26,6 +26,7 @@ jwt:
 mongodb:
   collection:
     customers: customers
+    categories: categories
 
 server:
   port: 80
