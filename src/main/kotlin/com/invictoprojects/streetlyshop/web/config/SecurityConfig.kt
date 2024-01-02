@@ -1,6 +1,6 @@
 package com.invictoprojects.streetlyshop.web.config
 
-import com.invictoprojects.streetlyshop.persistence.domain.customer.Role
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Role
 import com.invictoprojects.streetlyshop.web.filter.JWTAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
