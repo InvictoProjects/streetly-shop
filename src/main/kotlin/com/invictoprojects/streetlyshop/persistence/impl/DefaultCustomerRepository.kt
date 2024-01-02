@@ -1,7 +1,7 @@
 package com.invictoprojects.streetlyshop.persistence.impl
 
 import com.invictoprojects.streetlyshop.persistence.CustomerRepository
-import com.invictoprojects.streetlyshop.persistence.domain.customer.Customer
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
 import com.invictoprojects.streetlyshop.web.exception.UserNotFoundException
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Value

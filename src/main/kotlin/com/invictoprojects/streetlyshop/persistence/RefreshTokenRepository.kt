@@ -1,6 +1,6 @@
 package com.invictoprojects.streetlyshop.persistence
 
-import com.invictoprojects.streetlyshop.persistence.domain.customer.RefreshToken
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.RefreshToken
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 

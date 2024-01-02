@@ -1,4 +1,4 @@
-package com.invictoprojects.streetlyshop.persistence.domain.customer
+package com.invictoprojects.streetlyshop.persistence.domain.model.customer
 
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id

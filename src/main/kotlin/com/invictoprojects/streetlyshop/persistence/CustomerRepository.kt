@@ -1,6 +1,6 @@
 package com.invictoprojects.streetlyshop.persistence
 
-import com.invictoprojects.streetlyshop.persistence.domain.customer.Customer
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
 import org.bson.types.ObjectId
 
 interface CustomerRepository {

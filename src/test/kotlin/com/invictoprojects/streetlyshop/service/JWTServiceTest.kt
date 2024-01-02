@@ -1,9 +1,9 @@
 package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.RefreshTokenRepository
-import com.invictoprojects.streetlyshop.persistence.domain.customer.Customer
-import com.invictoprojects.streetlyshop.persistence.domain.customer.RefreshToken
-import com.invictoprojects.streetlyshop.persistence.domain.customer.Role
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.RefreshToken
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Role
 import com.invictoprojects.streetlyshop.web.exception.InvalidRefreshTokenException
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
