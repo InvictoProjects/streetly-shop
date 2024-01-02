@@ -29,7 +29,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	// mongodb
-//	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
 	// jwt
 	implementation("io.jsonwebtoken:jjwt-api:0.11.2")
@@ -40,7 +40,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
 	// swagger
-//	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
 
 	// azure storage
 	implementation("com.azure.spring:spring-cloud-azure-starter-storage")
