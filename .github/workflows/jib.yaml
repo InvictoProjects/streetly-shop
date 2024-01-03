@@ -17,9 +17,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Run Jib plugin with Gradle Wrapper
+        env:
+          REF_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
           if [ "$GITHUB_REF_TYPE" == "tag" ]; then
-            ADDITIONAL_TAGS="$GITHUB_REF_NAME,latest"
+            ADDITIONAL_TAGS="$REF_NAME,latest"
+          else
+            ADDITIONAL_TAGS="$REF_NAME"
           fi
           
           ./gradlew jib \
