@@ -1,0 +1,33 @@
+name: Build and Push Docker image with Jib
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Run Jib plugin with Gradle Wrapper
+        env:
+          REF_NAME: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if [ "$GITHUB_REF_TYPE" == "tag" ]; then
+            ADDITIONAL_TAGS="$REF_NAME,latest"
+          else
+            ADDITIONAL_TAGS="$REF_NAME"
+          fi
+          
+          ./gradlew jib \
+            -Djib.to.image=ghcr.io/invictoprojects/streetly-shop:$GITHUB_SHA \
+            -Djib.to.tags=$ADDITIONAL_TAGS \
+            -Djib.to.auth.username=${{ github.repository_owner }} \
+            -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
