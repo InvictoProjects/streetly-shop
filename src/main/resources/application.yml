@@ -25,8 +25,15 @@ jwt:
 
 mongodb:
   collection:
+    attribute-definitions: attributeDefinitions
+    attribute-values: attributeValues
+    products: products
     customers: customers
+    contents: contents
+    variants: variants
     categories: categories
+    medias: medias
+    reviews: reviews
 
 server:
   port: 80
