@@ -10,6 +10,11 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  servlet:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+
   data:
     mongodb:
       uri: mongodb+srv://mongouser:15032002@monomarketcluster.ygdwjp2.mongodb.net/?retryWrites=true&w=majority
