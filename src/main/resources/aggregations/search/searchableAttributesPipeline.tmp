@@ -1,0 +1,16 @@
+[
+    %{productPropertiesSearchFilters},
+    { $lookup: {from: "%{contentsCollection}", localField: "contentIds", foreignField: "_id", as: "contents"}},
+    {$unwind: "$contents"},
+    { $lookup: {from: "%{variantsCollection}", localField: "contents.variantIds", foreignField: "_id", as: "contents.variants"}},
+    {$unwind: "$contents.variants"},
+    { $project: {"allAttributes": {$concatArrays: [ "$attributes", "$contents.attributes", "$contents.variants.attributes"] }} },
+    {$unwind: "$allAttributes"},
+    {$group: {_id: "$allAttributes._id", valueIds: { $addToSet: "$allAttributes.valueId" }}},
+    {$lookup: {from: "%{attributeDefinitionsCollection}", localField: "_id", foreignField: "_id", as: "definitions"}},
+    {$lookup: {from: "%{attributeValuesCollection}", localField: "valueIds", foreignField: "_id", as: "values"}},
+    { $set: {"definition": {$arrayElemAt: [ "$definitions", 0 ] }} },
+    { $unset: "definitions"},
+    {$match: {"definition.searchable" : true}},
+    {$sort: {"definition.priority": -1}}
+]

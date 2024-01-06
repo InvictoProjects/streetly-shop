@@ -4,7 +4,9 @@ import com.invictoprojects.streetlyshop.persistence.*
 import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.PaginatedProductSearch
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeSearch
 import com.invictoprojects.streetlyshop.persistence.service.MongoQueryService
+import com.invictoprojects.streetlyshop.service.model.AttributeSearchAggregation
 import com.invictoprojects.streetlyshop.service.model.ProductSearchAggregation
 import com.invictoprojects.streetlyshop.web.exception.ProductNotFoundException
 import org.apache.commons.text.StringSubstitutor
@@ -111,6 +113,7 @@ class DefaultProductRepository(
             val params = mutableMapOf<String, String>()
             params["productsCollection"] = productsCollection
             params["variantsCollection"] = variantsCollection
+            params["productPropertiesSearchFilters"] = getProductPropertiesSearchFilters(aggregation).joinToString()
             params["variantPropertiesSearchFilters"] = getVariantPropertiesSearchFilters(aggregation).joinToString()
             params["attributesMatchStage"] = attributeValueFilter?.let { getMatchAttributeValueStage(it) } ?: ""
             params["sortStage"] = mongoQueryService.getSortStageJson(productSortingOrder)
@@ -185,6 +188,38 @@ class DefaultProductRepository(
         with(aggregation) {
             val variantPropertiesSearchFilters = mutableListOf<String>()
 
+            salePriceGT?.let {
+                val stage = mongoQueryService.getMatchGTStageJson(
+                    "variants.prices.${currency}.salePrice",
+                    "NumberDecimal('$it')"
+                )
+                variantPropertiesSearchFilters.add(stage)
+            }
+
+            salePriceLT?.let {
+                val stage = mongoQueryService.getMatchLTStageJson(
+                    "variants.prices.${currency}.salePrice",
+                    "NumberDecimal('$it')"
+                )
+                variantPropertiesSearchFilters.add(stage)
+            }
+
+            originalPriceGT?.let {
+                val stage = mongoQueryService.getMatchGTStageJson(
+                    "variants.prices.${currency}.originalPrice",
+                    "NumberDecimal('$it')"
+                )
+                variantPropertiesSearchFilters.add(stage)
+            }
+
+            originalPriceLT?.let {
+                val stage = mongoQueryService.getMatchLTStageJson(
+                    "variants.prices.${currency}.originalPrice",
+                    "NumberDecimal('$it')"
+                )
+                variantPropertiesSearchFilters.add(stage)
+            }
+
             stockQuantityGT.let {
                 val stage = mongoQueryService.getMatchGTStageJson(
                     "variants.stock.quantity",
@@ -215,4 +250,53 @@ class DefaultProductRepository(
         return "{\$match: {\$and: $filters}},"
     }
 
+    override fun searchAttributes(aggregation: AttributeSearchAggregation): List<AttributeSearch> {
+        val params = mutableMapOf<String, String>()
+        params["contentsCollection"] = getCollection(contentsPrefix, aggregation.language)
+        params["variantsCollection"] = variantsCollection
+        params["attributeDefinitionsCollection"] = getCollection(attributeDefinitionsPrefix, aggregation.language)
+        params["attributeValuesCollection"] = getCollection(attributeValuesPrefix, aggregation.language)
+        params["productPropertiesSearchFilters"] = getProductPropertiesSearchFilters(aggregation).joinToString()
+
+        val searchPipeline = StringSubstitutor.replace(searchableAttributesPipeline, params,
+            PREFIX,
+            SUFFIX
+        )
+
+        val pipeline = BsonArrayCodec()
+            .decode(
+                JsonReader(searchPipeline),
+                DecoderContext.builder().build()
+            ).values
+            .map { it.asDocument() }
+
+        return mongoTemplate.execute(productsCollection) { collection ->
+            collection
+                .aggregate(pipeline)
+                .map { mongoTemplate.converter.read(AttributeSearch::class.java, it) }
+                .toList()
+        }
+    }
+
+    private fun getProductPropertiesSearchFilters(aggregation: AttributeSearchAggregation): MutableList<String> {
+        with(aggregation) {
+            val productPropertiesSearchFilters = mutableListOf<String>()
+
+            createdBy?.let {
+                val stage = mongoQueryService.getMatchObjectIdStageJson("createdBy", it)
+                productPropertiesSearchFilters.add(stage)
+            }
+
+            categoryId?.let {
+                val stage = mongoQueryService.getMatchObjectIdStageJson("categoryId", it)
+                productPropertiesSearchFilters.add(stage)
+            }
+
+            val productStatusesMatchStage =
+                mongoQueryService.getMatchInStageJson("status", productStatuses.map { "'$it'" })
+            productPropertiesSearchFilters.add(productStatusesMatchStage)
+
+            return productPropertiesSearchFilters
+        }
+    }
 }

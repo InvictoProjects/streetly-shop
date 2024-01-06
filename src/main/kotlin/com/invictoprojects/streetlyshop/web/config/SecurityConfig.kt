@@ -24,14 +24,51 @@ class SecurityConfig {
             .and().csrf().disable()
             .authorizeHttpRequests()
 
+            .antMatchers(HttpMethod.POST, "/v1/api/attribute-definition/**")
+            .hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/attribute-definition/**")
+            .hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/attribute-definition/*/*").permitAll()
+
+            .antMatchers("/v1/api/attribute/search").permitAll()
+
+            .antMatchers(HttpMethod.PUT, "/v1/api/attribute/value/*/name").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+
+            .antMatchers("/v1/api/auth/**").permitAll()
+
+            .antMatchers(HttpMethod.POST, "/v1/api/category/**").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/category/**").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/category/*/*").permitAll()
+
+            .antMatchers(HttpMethod.POST, "/v1/api/content/**").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/content/**").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/content/*/*").permitAll()
+
+
             .antMatchers(HttpMethod.POST, "/v1/api/customer/register").permitAll()
             .antMatchers(HttpMethod.POST, "/v1/api/customer/**").authenticated()
             .antMatchers(HttpMethod.PUT, "/v1/api/customer/**").authenticated()
             .antMatchers(HttpMethod.DELETE, "/v1/api/customer/**").authenticated()
 
+            .antMatchers("/v1/api/exchange-rate/**").hasRole(Role.ADMIN.name)
+
+            .antMatchers("/").permitAll()
+
+            .antMatchers("/v1/api/media/**").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+
+            .antMatchers("/v1/api/notification/callback").permitAll()
+
             .antMatchers(HttpMethod.POST, "/v1/api/product").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.PUT, "/v1/api/product/*").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.GET, "/v1/api/product/*/*").permitAll()
+
+            .antMatchers("/v1/api/product/search").permitAll()
+
+            .antMatchers("/v1/api/review").authenticated()
+
+            .antMatchers(HttpMethod.POST, "/v1/api/variant").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/variant/*/stock").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/variant/*/*").permitAll()
 
             .antMatchers(
                 "/swagger-resources/**",
@@ -53,7 +90,7 @@ class SecurityConfig {
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
-        return com.invictoprojects.streetlyshop.web.config.DefaultCorsConfigurationSource()
+        return DefaultCorsConfigurationSource()
     }
 
     companion object {
