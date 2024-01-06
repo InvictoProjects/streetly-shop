@@ -72,7 +72,8 @@ internal class AuthenticationControllerTest {
         val request = BasicLoginRequest("email", "password")
         val loginResponse = LoginResponse("accessToken")
 
-        BDDMockito.given(loginService.login(request)).willReturn(ResponseEntity.status(HttpStatus.OK).body(loginResponse))
+        BDDMockito.given(loginService.login(request))
+            .willReturn(ResponseEntity.status(HttpStatus.OK).body(loginResponse))
 
         val response = mockMvc.perform(
             MockMvcRequestBuilders.post("/v1/api/auth/basic-login")
@@ -82,7 +83,8 @@ internal class AuthenticationControllerTest {
         ).andReturn().response
 
         AssertionsForInterfaceTypes.assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        AssertionsForInterfaceTypes.assertThat(response.contentAsString).isEqualTo(objectMapper.writeValueAsString(loginResponse))
+        AssertionsForInterfaceTypes.assertThat(response.contentAsString)
+            .isEqualTo(objectMapper.writeValueAsString(loginResponse))
         Mockito.verify(loginService).login(request)
     }
 
@@ -116,7 +118,8 @@ internal class AuthenticationControllerTest {
         ).andReturn().response
 
         AssertionsForInterfaceTypes.assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        AssertionsForInterfaceTypes.assertThat(response.contentAsString).isEqualTo(objectMapper.writeValueAsString(loginResponse))
+        AssertionsForInterfaceTypes.assertThat(response.contentAsString)
+            .isEqualTo(objectMapper.writeValueAsString(loginResponse))
         Mockito.verify(loginService).refresh(userId, refreshToken)
     }
 }

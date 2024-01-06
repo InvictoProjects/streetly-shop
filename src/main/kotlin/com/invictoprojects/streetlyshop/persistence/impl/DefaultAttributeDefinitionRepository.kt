@@ -22,7 +22,10 @@ class DefaultAttributeDefinitionRepository(
     val mongoTemplate: MongoTemplate
 ) : AttributeDefinitionRepository {
     override fun save(attributeDefinition: AttributeDefinition): AttributeDefinition {
-        return mongoTemplate.save(attributeDefinition, getCollection(attributeDefinitionsPrefix, attributeDefinition.languageCode))
+        return mongoTemplate.save(
+            attributeDefinition,
+            getCollection(attributeDefinitionsPrefix, attributeDefinition.languageCode)
+        )
     }
 
     override fun findById(id: ObjectId, language: Language): AttributeDefinition? {
@@ -42,6 +45,7 @@ class DefaultAttributeDefinitionRepository(
 
         val aggregation = Aggregation.newAggregation(matchStage, lookupStage)
         val attributeDefinitionsCollection = getCollection(attributeDefinitionsPrefix, language)
-        return mongoTemplate.aggregate(aggregation, attributeDefinitionsCollection, AttributeDefinition::class.java).single()
+        return mongoTemplate.aggregate(aggregation, attributeDefinitionsCollection, AttributeDefinition::class.java)
+            .single()
     }
 }
