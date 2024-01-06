@@ -1,6 +1,8 @@
 package com.invictoprojects.streetlyshop.persistence.domain.model.product.variant
 
+import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.Attribute
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.Price
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -18,5 +20,6 @@ data class Variant(
     val createdBy: ObjectId,
     val creationDate: Instant = Instant.now(),
     var modifiedDate: Instant = Instant.now(),
+    var prices: MutableMap<Currency, Price> = mutableMapOf(),
     var stock: Stock = Stock()
 )
