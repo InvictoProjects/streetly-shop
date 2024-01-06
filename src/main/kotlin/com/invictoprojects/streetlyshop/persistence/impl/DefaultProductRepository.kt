@@ -268,7 +268,8 @@ class DefaultProductRepository(
         params["productPropertiesSearchFilters"] = getProductPropertiesSearchFilters(aggregation).joinToString()
 
         val searchPipeline = StringSubstitutor.replace(
-            searchableAttributesPipeline, params,
+            searchableAttributesPipeline,
+            params,
             PREFIX,
             SUFFIX
         )
