@@ -22,7 +22,6 @@ spring:
           account-key: ${AZURE_BLOB_STORAGE_ACCOUNT_KEY}
           endpoint: ${AZURE_BLOB_STORAGE_ENDPOINT}
 
-
 jwt:
   secret: Xh0LagoOTKRh086LeHLc7zaOVX0Tobd16SRJ5HVp3CI1tUtThD6jLiqMtua6sZMcMBJc7NtW7rLV7Ncd
   access:
