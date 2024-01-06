@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class ContentService(
-        private val productRepository: ProductRepository,
-        private val contentRepository: ContentRepository,
-        private val attributeService: AttributeService,
-        private val authenticationFacade: AuthenticationFacade
+    private val productRepository: com.invictoprojects.streetlyshop.persistence.ProductRepository,
+    private val contentRepository: com.invictoprojects.streetlyshop.persistence.ContentRepository,
+    private val attributeService: AttributeService,
+    private val authenticationFacade: AuthenticationFacade
 ) {
 
     fun createContent(request: CreateContentRequest): ContentDTO {
@@ -42,24 +42,24 @@ class ContentService(
     }
 
     private fun createContentForEachLanguage(
-            contentId: ObjectId,
-            productId: ObjectId,
-            request: CreateContentRequest
+        contentId: ObjectId,
+        productId: ObjectId,
+        request: CreateContentRequest
     ): Content {
         val currentUserId = authenticationFacade.getAuthentication().name.toObjectId()
         val contentsForEachLanguage = Language.values()
-                .map { language ->
-                    Content(
-                            id = contentId,
-                            productId = productId,
-                            name = request.name!!,
-                            description = request.description!!,
-                            attributes = request.attributes.map { it.toAttribute() }.toMutableList(),
-                            languageCode = language,
-                            createdBy = currentUserId
-                    )
-                }
-                .map { contentRepository.save(it) }
+            .map { language ->
+                Content(
+                    id = contentId,
+                    productId = productId,
+                    name = request.name!!,
+                    description = request.description!!,
+                    attributes = request.attributes.map { it.toAttribute() }.toMutableList(),
+                    languageCode = language,
+                    createdBy = currentUserId
+                )
+            }
+            .map { contentRepository.save(it) }
 
         return contentsForEachLanguage.first { it.languageCode == Language.En }
     }
@@ -90,4 +90,18 @@ class ContentService(
     fun getContent(contentId: String, language: Language): ContentDTO {
         return contentRepository.getByIdAggregated(contentId.toObjectId(), language).toDTO()
     }
+}
+
+fun Content.toDTO(): ContentDTO {
+    return ContentDTO(
+        id = id.toString(),
+        productId = productId.toString(),
+        name = name,
+        description = description,
+        variantIds = variantIds.map { it.toString() },
+        variants = variants.map { it.toDTO() },
+        attributes = attributes.map { it.toDTO() },
+        creationDate = creationDate,
+        modifiedDate = modifiedDate
+    )
 }
