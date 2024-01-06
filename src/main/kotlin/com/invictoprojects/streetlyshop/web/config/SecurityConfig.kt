@@ -24,6 +24,11 @@ class SecurityConfig {
             .and().csrf().disable()
             .authorizeHttpRequests()
 
+            .antMatchers(HttpMethod.POST, "/v1/api/customer/register").permitAll()
+            .antMatchers(HttpMethod.POST, "/v1/api/customer/**").authenticated()
+            .antMatchers(HttpMethod.PUT, "/v1/api/customer/**").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/v1/api/customer/**").authenticated()
+
             .antMatchers(HttpMethod.POST, "/v1/api/product").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.PUT, "/v1/api/product/*").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.GET, "/v1/api/product/*/*").permitAll()
