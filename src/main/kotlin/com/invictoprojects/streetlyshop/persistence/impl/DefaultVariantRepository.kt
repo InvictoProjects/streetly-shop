@@ -93,8 +93,8 @@ class DefaultVariantRepository(
     override fun updatePricesWithNewExchangeRate(currency: Currency, exchangeRate: BigDecimal) {
         val params = mutableMapOf(Pair("exchangeRate", exchangeRate.toString()), Pair("currency", currency.toString()))
         val priceAggregation = StringSubstitutor.replace(priceUpdateAggregation, params,
-            com.invictoprojects.streetlyshop.persistence.PREFIX,
-            com.invictoprojects.streetlyshop.persistence.SUFFIX
+            PREFIX,
+            SUFFIX
         )
 
         mongoTemplate.execute(variantsCollection) { collection ->
@@ -105,8 +105,8 @@ class DefaultVariantRepository(
     override fun updateStock(id: ObjectId, stockDelta: Long) {
         val params = mutableMapOf(Pair("stockDelta", stockDelta))
         val stockAggregation = StringSubstitutor.replace(stockUpdateAggregation, params,
-            com.invictoprojects.streetlyshop.persistence.PREFIX,
-            com.invictoprojects.streetlyshop.persistence.SUFFIX
+            PREFIX,
+            SUFFIX
         )
 
         return mongoTemplate.execute(variantsCollection) { collection ->
@@ -123,8 +123,8 @@ class DefaultVariantRepository(
         )
 
         val aggregation = StringSubstitutor.replace(variantInfoAggregation, params,
-            com.invictoprojects.streetlyshop.persistence.PREFIX,
-            com.invictoprojects.streetlyshop.persistence.SUFFIX
+            PREFIX,
+            SUFFIX
         )
 
         val pipeline = BsonArrayCodec()

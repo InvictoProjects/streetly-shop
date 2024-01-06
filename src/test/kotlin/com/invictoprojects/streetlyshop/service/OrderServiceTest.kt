@@ -31,13 +31,13 @@ import java.util.*
 internal class OrderServiceTest {
 
     @Mock
-    lateinit var orderRepository: com.invictoprojects.streetlyshop.persistence.OrderRepository
+    lateinit var orderRepository: OrderRepository
 
     @Mock
-    lateinit var variantRepository: com.invictoprojects.streetlyshop.persistence.VariantRepository
+    lateinit var variantRepository: VariantRepository
 
     @Mock
-    lateinit var customerRepository: com.invictoprojects.streetlyshop.persistence.CustomerRepository
+    lateinit var customerRepository: CustomerRepository
 
     @Mock
     lateinit var authenticationFacade: AuthenticationFacade

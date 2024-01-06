@@ -16,7 +16,7 @@ class DefaultOrderRepository(
         @Value("\${mongodb.collection.orders}")
         val ordersCollection: String,
         val mongoTemplate: MongoTemplate
-) : com.invictoprojects.streetlyshop.persistence.OrderRepository {
+) : OrderRepository {
 
     override fun save(order: Order): Order {
         return mongoTemplate.save(order, ordersCollection)

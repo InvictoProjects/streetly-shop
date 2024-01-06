@@ -30,7 +30,7 @@ class DefaultContentRepository(
         @Qualifier("contentAggregation")
         val contentAggregation: String,
         val mongoTemplate: MongoTemplate
-) : com.invictoprojects.streetlyshop.persistence.ContentRepository {
+) : ContentRepository {
     override fun save(content: Content): Content {
         return mongoTemplate.save(content, getCollection(contentsPrefix, content.languageCode))
     }
@@ -43,8 +43,8 @@ class DefaultContentRepository(
         )
 
         val aggregation = StringSubstitutor.replace(contentAggregation, params,
-                com.invictoprojects.streetlyshop.persistence.PREFIX,
-                com.invictoprojects.streetlyshop.persistence.SUFFIX
+                PREFIX,
+                SUFFIX
         )
 
         val pipeline = BsonArrayCodec()

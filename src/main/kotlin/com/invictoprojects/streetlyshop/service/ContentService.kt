@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ContentService(
-    private val productRepository: com.invictoprojects.streetlyshop.persistence.ProductRepository,
-    private val contentRepository: com.invictoprojects.streetlyshop.persistence.ContentRepository,
+    private val productRepository: ProductRepository,
+    private val contentRepository: ContentRepository,
     private val attributeService: AttributeService,
     private val authenticationFacade: AuthenticationFacade
 ) {

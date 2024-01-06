@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ExchangeRateService(
-    private val exchangeRateRepository: com.invictoprojects.streetlyshop.persistence.ExchangeRateRepository,
-    private val variantRepository: com.invictoprojects.streetlyshop.persistence.VariantRepository
+    private val exchangeRateRepository: ExchangeRateRepository,
+    private val variantRepository: VariantRepository
 ) {
 
     fun updateExchangeRate(request: UpdateExchangeRateRequest): ExchangeRateDTO {
