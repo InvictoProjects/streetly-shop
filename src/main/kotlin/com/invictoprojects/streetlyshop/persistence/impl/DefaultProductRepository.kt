@@ -70,7 +70,8 @@ class DefaultProductRepository(
         )
 
         val aggregation = StringSubstitutor.replace(
-            productAggregation, params,
+            productAggregation,
+            params,
             PREFIX,
             SUFFIX
         )
