@@ -7,7 +7,7 @@ import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
 @Service
-class AttributeValueService(val attributeValueRepository: com.invictoprojects.streetlyshop.persistence.AttributeValueRepository) {
+class AttributeValueService(val attributeValueRepository: AttributeValueRepository) {
 
     fun updateName(id: ObjectId, request: UpdateAttributeValueNameRequest) {
         val attributeValue = attributeValueRepository.getById(id, request.language!!)

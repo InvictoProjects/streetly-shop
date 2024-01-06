@@ -1,6 +1,11 @@
 package com.invictoprojects.streetlyshop.persistence.impl
 
-import com.invictoprojects.streetlyshop.persistence.*
+import com.invictoprojects.streetlyshop.persistence.ContentRepository
+import com.invictoprojects.streetlyshop.persistence.LIST_CLOSING_BRACKET
+import com.invictoprojects.streetlyshop.persistence.LIST_OPENING_BRACKET
+import com.invictoprojects.streetlyshop.persistence.PREFIX
+import com.invictoprojects.streetlyshop.persistence.ProductRepository
+import com.invictoprojects.streetlyshop.persistence.SUFFIX
 import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.PaginatedProductSearch
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
@@ -64,7 +69,8 @@ class DefaultProductRepository(
             Pair("attributeValuesCollection", getCollection(attributeValuesPrefix, language))
         )
 
-        val aggregation = StringSubstitutor.replace(productAggregation, params,
+        val aggregation = StringSubstitutor.replace(
+            productAggregation, params,
             PREFIX,
             SUFFIX
         )
@@ -243,7 +249,9 @@ class DefaultProductRepository(
     private fun getMatchAttributeValueStage(attributeValueFilter: List<List<ObjectId>>): String {
         val filters = attributeValueFilter.map {
             val orGroup =
-                it.map { attributeValue -> "{'allAttributes': {\$elemMatch: {'valueId': ObjectId('$attributeValue')}}}" }
+                it.map { attributeValue ->
+                    "{'allAttributes': {\$elemMatch: {'valueId': ObjectId('$attributeValue')}}}"
+                }
             "{\$or: $orGroup}"
         }
 
@@ -258,7 +266,8 @@ class DefaultProductRepository(
         params["attributeValuesCollection"] = getCollection(attributeValuesPrefix, aggregation.language)
         params["productPropertiesSearchFilters"] = getProductPropertiesSearchFilters(aggregation).joinToString()
 
-        val searchPipeline = StringSubstitutor.replace(searchableAttributesPipeline, params,
+        val searchPipeline = StringSubstitutor.replace(
+            searchableAttributesPipeline, params,
             PREFIX,
             SUFFIX
         )

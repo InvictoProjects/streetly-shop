@@ -3,7 +3,7 @@ package com.invictoprojects.streetlyshop.service
 import com.mongodb.assertions.Assertions.assertTrue
 import com.invictoprojects.streetlyshop.persistence.ContentRepository
 import com.invictoprojects.streetlyshop.persistence.VariantRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.content.Content
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
@@ -19,13 +19,15 @@ import org.bson.types.Decimal128
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
 import org.mockito.BDDMockito.given
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import java.math.BigDecimal
-import java.util.*
 
 
 @ExtendWith(MockitoExtension::class)

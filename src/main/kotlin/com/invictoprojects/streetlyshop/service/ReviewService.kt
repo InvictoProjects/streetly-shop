@@ -1,6 +1,10 @@
 package com.invictoprojects.streetlyshop.service
 
-import com.invictoprojects.streetlyshop.persistence.*
+import com.invictoprojects.streetlyshop.persistence.CustomerRepository
+import com.invictoprojects.streetlyshop.persistence.MediaRepository
+import com.invictoprojects.streetlyshop.persistence.ProductRepository
+import com.invictoprojects.streetlyshop.persistence.ReviewRepository
+import com.invictoprojects.streetlyshop.persistence.VariantRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
 import com.invictoprojects.streetlyshop.persistence.domain.model.media.Media
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Review

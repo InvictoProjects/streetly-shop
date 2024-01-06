@@ -2,7 +2,6 @@ package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.ExchangeRateRepository
 import com.invictoprojects.streetlyshop.persistence.VariantRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
 import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateExchangeRateRequest
@@ -12,9 +11,13 @@ import org.assertj.core.api.Assertions.catchThrowable
 import org.bson.types.Decimal128
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 import java.math.BigDecimal
 import java.util.*

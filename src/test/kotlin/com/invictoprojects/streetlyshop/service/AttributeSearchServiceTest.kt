@@ -1,7 +1,7 @@
 package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.ProductRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeDefinition
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeSearch
@@ -15,9 +15,8 @@ import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
-import java.util.*
 
 
 @ExtendWith(MockitoExtension::class)

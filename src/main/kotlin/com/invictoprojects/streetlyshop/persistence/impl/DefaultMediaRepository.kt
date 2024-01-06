@@ -1,6 +1,6 @@
 package com.invictoprojects.streetlyshop.persistence.impl
 
-import com.invictoprojects.streetlyshop.persistence.*
+import com.invictoprojects.streetlyshop.persistence.MediaRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.media.Media
 import com.invictoprojects.streetlyshop.web.exception.MediaNotFoundException
 import org.bson.types.ObjectId

@@ -20,6 +20,7 @@ class JWTService(
     @Value("\${jwt.secret}") val jwtKey: String,
     @Value("\${jwt.access.expiration}") val accessTokenExpirationTime: Long,
     @Value("\${jwt.refresh.expiration}") val refreshTokenExpirationTime: Long,
+    @Value("\${jwt.refresh.length}") val refreshTokenLength: Int,
     val refreshTokenRepository: RefreshTokenRepository
 ) {
 
@@ -39,7 +40,7 @@ class JWTService(
 
     fun createRefreshToken(userId: ObjectId): RefreshToken {
         val expiration = Date(Date().time + refreshTokenExpirationTime)
-        val refreshToken = RefreshToken(userId, generateSecret(40), expiration)
+        val refreshToken = RefreshToken(userId, generateSecret(refreshTokenLength), expiration)
         refreshTokenRepository.save(refreshToken)
 
         return refreshToken

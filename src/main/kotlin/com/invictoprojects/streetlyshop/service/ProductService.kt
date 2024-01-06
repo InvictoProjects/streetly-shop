@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service
 class ProductService(
     private val productRepository: ProductRepository,
     private val categoryRepository: CategoryRepository,
-    private val attributeService: AttributeService,
     private val authenticationFacade: AuthenticationFacade
 ) {
     fun createProduct(request: CreateProductRequest): ProductDTO {
