@@ -1,5 +1,6 @@
 package com.invictoprojects.streetlyshop.service.model
 
+import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
 import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductSortingOrder
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
@@ -16,6 +17,7 @@ data class ProductSearchAggregation(
     val creationDateLT: Instant?,
     val modifiedDateGT: Instant?,
     val modifiedDateLT: Instant?,
+    val currency: Currency,
     val salePriceGT: Decimal128?,
     val salePriceLT: Decimal128?,
     val originalPriceGT: Decimal128?,
