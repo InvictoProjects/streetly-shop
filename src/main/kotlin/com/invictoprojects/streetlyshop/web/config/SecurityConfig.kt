@@ -24,9 +24,9 @@ class SecurityConfig {
             .and().csrf().disable()
             .authorizeHttpRequests()
 
-            .antMatchers("/v1/api/auth/**").permitAll()
-
-            .antMatchers("/").permitAll()
+            .antMatchers(HttpMethod.POST, "/v1/api/product").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/product/*").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/product/*/*").permitAll()
 
             .antMatchers(
                 "/swagger-resources/**",
@@ -48,7 +48,7 @@ class SecurityConfig {
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
-        return DefaultCorsConfigurationSource()
+        return com.invictoprojects.streetlyshop.web.config.DefaultCorsConfigurationSource()
     }
 
     companion object {
