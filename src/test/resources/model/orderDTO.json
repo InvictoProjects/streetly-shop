@@ -1,0 +1,113 @@
+{
+  "id": "64768576a6f9eb18c57c93fa",
+  "customerId": "64767fdaad10a76bbfb85b63",
+  "customer": {
+    "id": "64767fdaad10a76bbfb85b63",
+    "name": null,
+    "surname": null,
+    "middleName": null,
+    "avatar": null,
+    "phone": null,
+    "birthDay": null,
+    "gender": null,
+    "nickname": "john@gmail.com",
+    "email": "john@gmail.com",
+    "registeredAt": "2023-05-30T22:59:38.817Z"
+  },
+  "creationDate": "2023-05-30T23:23:34.390Z",
+  "modifiedDate": "2023-05-30T23:23:34.390Z",
+  "deliveryService": "Some Delivery Service",
+  "city": "Sample City",
+  "department": "Sample Department",
+  "recipientName": "John",
+  "recipientSurname": "Doe",
+  "recipientMiddleName": "M.",
+  "status": "AWAITING_PAYMENT",
+  "lines": [
+    {
+      "id": "64768576a6f9eb18c57c93f9",
+      "variantInfo": {
+        "contentId": "64767ff6ad10a76bbfb85b65",
+        "productId": "64767fecad10a76bbfb85b64",
+        "product": {
+          "id": "64767fecad10a76bbfb85b64",
+          "categoryId": "646e875f36e9326e5286d1b8",
+          "category": null,
+          "creationDate": "2023-05-30T22:59:56.323Z",
+          "modifiedDate": "2023-05-30T23:00:06.980Z",
+          "contentIds": ["64767ff6ad10a76bbfb85b65"],
+          "contents": [],
+          "attributes": [
+            {
+              "id": "646e877136e9326e5286d1b9",
+              "valueId": "646e877136e9326e5286d1ba",
+              "definition": null,
+              "value": null
+            }
+          ],
+          "status": "DRAFT",
+          "rating": 0.0,
+          "reviewCount": 0,
+          "reviewIds": [],
+          "reviews": [],
+          "favoriteCount": 0
+        },
+        "name": "Black Jeans | Cool",
+        "description": "These Jeans are awesome",
+        "attributes": [
+          {
+            "id": "646e877136e9326e5286d1b9",
+            "valueId": "646e877136e9326e5286d1ba",
+            "definition": null,
+            "value": null
+          }
+        ],
+        "variantIds": ["64767ffead10a76bbfb85b66"],
+        "variants": {
+          "id": "64767ffead10a76bbfb85b66",
+          "barcode": "123123123346",
+          "productId": "64767fecad10a76bbfb85b64",
+          "contentId": "64767ff6ad10a76bbfb85b65",
+          "medias": [
+            {
+              "url": "media.url",
+              "order": 1
+            }
+          ],
+          "attributes": [
+            {
+              "id": "646e877136e9326e5286d1b9",
+              "valueId": "646e877136e9326e5286d1ba",
+              "definition": null,
+              "value": null
+            }
+          ],
+          "creationDate": "2023-05-30T23:00:14.514Z",
+          "modifiedDate": "2023-05-30T23:00:14.514Z",
+          "prices": {
+            "PLN": {
+              "salePrice": 60.4989,
+              "originalPrice": 120.9989
+            },
+            "UAH": {
+              "salePrice": 549.99,
+              "originalPrice": 1099.99
+            },
+            "EUR": {
+              "salePrice": 12.64977,
+              "originalPrice": 25.29977
+            }
+          },
+          "stock": {
+            "quantity": 35
+          }
+        },
+        "languageCode": "En",
+        "creationDate": "2023-05-30T23:00:07.023Z",
+        "modifiedDate": "2023-05-30T23:00:14.266Z",
+        "createdBy": "64767fdaad10a76bbfb85b63"
+      },
+      "quantity": 12
+    }
+  ]
+}
