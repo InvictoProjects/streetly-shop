@@ -34,6 +34,10 @@ jwt:
   refresh:
     expiration: 86400000
 
+telegram:
+  token: ${TELEGRAM_TOKEN}
+  chatId: ${TELEGRAM_CHAT_ID}
+
 mongodb:
   collection:
     attribute-definitions: attributeDefinitions
