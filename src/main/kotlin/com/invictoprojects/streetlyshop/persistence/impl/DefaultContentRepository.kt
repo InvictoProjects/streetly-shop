@@ -42,10 +42,7 @@ class DefaultContentRepository(
                 Pair("attributeValuesCollection", getCollection(attributeValuesPrefix, language))
         )
 
-        val aggregation = StringSubstitutor.replace(contentAggregation, params,
-                PREFIX,
-                SUFFIX
-        )
+        val aggregation = StringSubstitutor.replace(contentAggregation, params, PREFIX, SUFFIX)
 
         val pipeline = BsonArrayCodec()
                 .decode(JsonReader(aggregation), DecoderContext.builder().build()).values
