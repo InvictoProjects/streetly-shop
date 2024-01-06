@@ -11,6 +11,7 @@ data class ReviewDTO(
     val customerName: String?,
     val customerAvatar: String?,
     val creationDate: Instant,
+    var medias: MutableList<MediaDTO>,
     val text: String,
     val rating: Int
 )
