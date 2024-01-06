@@ -48,7 +48,7 @@ class SecurityConfig {
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
-        return DefaultCorsConfigurationSource()
+        return com.invictoprojects.streetlyshop.web.config.DefaultCorsConfigurationSource()
     }
 
     companion object {
