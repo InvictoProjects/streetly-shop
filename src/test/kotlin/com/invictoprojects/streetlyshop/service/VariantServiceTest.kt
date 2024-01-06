@@ -63,7 +63,8 @@ internal class VariantServiceTest {
             stockQuantity = 10
         )
 
-        given(attributeService.validateAttributes(mutableListOf(attribute))).willThrow(InvalidAttributeException("Error"))
+        given(attributeService.validateAttributes(mutableListOf(attribute)))
+            .willThrow(InvalidAttributeException("Error"))
 
         val throwable = catchThrowable { variantService.createVariant(request) }
 
@@ -158,7 +159,9 @@ internal class VariantServiceTest {
         assertThat(variantDTO.productId).isEqualTo(productId.toString())
         assertThat(variantDTO.attributes).isEqualTo(request.attributes)
         assertThat(variantDTO.medias).isEqualTo(request.medias)
-        assertTrue(variantDTO.prices.all { (_, price) -> price.originalPrice == BigDecimal.TEN && price.salePrice == BigDecimal.ONE })
+        assertTrue(variantDTO.prices.all { (_, price) ->
+            price.originalPrice == BigDecimal.TEN && price.salePrice == BigDecimal.ONE
+        })
         assertThat(variantDTO.stock.quantity).isEqualTo(10)
     }
 
