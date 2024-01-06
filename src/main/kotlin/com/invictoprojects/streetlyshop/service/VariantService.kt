@@ -7,12 +7,14 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.content.Content
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Stock
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantInfo
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.Price
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.web.controller.dto.PriceDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.StockDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.VariantDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.VariantInfoDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateVariantRequest
 import com.invictoprojects.streetlyshop.web.exception.UserNotAuthorizedException
 import org.bson.types.Decimal128
@@ -114,6 +116,23 @@ fun Variant.toDTO(): VariantDTO {
         modifiedDate = modifiedDate,
         prices = prices.mapValues { (_, price) -> price.toDTO() },
         stock = stock.toDTO()
+    )
+}
+
+fun VariantInfo.toDTO(): VariantInfoDTO {
+    return VariantInfoDTO(
+            contentId = contentId.toString(),
+            productId = productId.toString(),
+            product = product.toDTO(),
+            name = name,
+            description = description,
+            attributes = attributes.map { it.toDTO() }.toMutableList(),
+            variantIds = variantIds.map { it.toString() }.toMutableList(),
+            variants = variants.toDTO(),
+            languageCode = languageCode,
+            creationDate = creationDate,
+            modifiedDate = modifiedDate,
+            createdBy = createdBy.toString()
     )
 }
 
