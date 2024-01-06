@@ -39,7 +39,7 @@ class JWTService(
 
     fun createRefreshToken(userId: ObjectId): RefreshToken {
         val expiration = Date(Date().time + refreshTokenExpirationTime)
-        val refreshToken = RefreshToken(userId, generateSecret(REFRESH_TOKEN_LENGTH), expiration)
+        val refreshToken = RefreshToken(userId, generateSecret(), expiration)
         refreshTokenRepository.save(refreshToken)
 
         return refreshToken
@@ -72,9 +72,9 @@ class JWTService(
             .orElseThrow { InvalidRefreshTokenException(userId) }
     }
 
-    private fun generateSecret(length: Int) = RandomStringUtils.randomAlphanumeric(length)
+    private fun generateSecret() = RandomStringUtils.randomAlphanumeric(SECRET_LENGTH)
 
     companion object {
-        const val REFRESH_TOKEN_LENGTH = 40
+        const val SECRET_LENGTH = 40
     }
 }
