@@ -12,8 +12,15 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb+srv://mongouser:15032002@monomarketcluster.ygdwjp2.mongodb.net/?retryWrites=true&w=majority
-      database: monomarket
+      uri: ${MONGO_DB_URL}
+      database: ${MONGO_DB_NAME}
+  cloud:
+    azure:
+      storage:
+        blob:
+          account-name: ${AZURE_BLOB_STORAGE_ACCOUNT_NAME}
+          account-key: ${AZURE_BLOB_STORAGE_ACCOUNT_KEY}
+          endpoint: ${AZURE_BLOB_STORAGE_ENDPOINT}
 
 
 jwt:
