@@ -2,6 +2,7 @@
 
 [![Build and Test with Gradle](https://github.com/InvictoProjects/streetly-shop/actions/workflows/gradle.yaml/badge.svg)](https://github.com/InvictoProjects/streetly-shop/actions/workflows/gradle.yaml)
 [![Build and Push Docker image with Jib](https://github.com/InvictoProjects/streetly-shop/actions/workflows/jib.yaml/badge.svg)](https://github.com/InvictoProjects/streetly-shop/actions/workflows/jib.yaml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b1b061d415404198b5c8ef4b4045afde)](https://app.codacy.com/gh/InvictoProjects/streetly-shop/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Relevance
