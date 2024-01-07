@@ -38,7 +38,11 @@ fun ProductSearchRequest.toAggregation(): ProductSearchAggregation {
         stockQuantityGT = stockQuantityGT,
         stockQuantityLT = stockQuantityLT,
         productSortingOrder = productSortingOrder,
-        attributeValueFilter = attributeValueFilter?.map { it.map { attributeValueId -> attributeValueId.toObjectId() } },
+        attributeValueFilter = attributeValueFilter?.map {
+            it.map { attributeValueId ->
+                attributeValueId.toObjectId()
+            }
+        },
         language = language,
         pageSize = pageSize,
         page = page
