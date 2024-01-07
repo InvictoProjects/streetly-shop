@@ -10,12 +10,12 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.Price
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
-import com.invictoprojects.streetlyshop.web.controller.dto.PriceDTO
-import com.invictoprojects.streetlyshop.web.controller.dto.StockDTO
+import com.invictoprojects.streetlyshop.util.toAttribute
+import com.invictoprojects.streetlyshop.util.toDTO
+import com.invictoprojects.streetlyshop.util.toDecimal128
 import com.invictoprojects.streetlyshop.web.controller.dto.VariantDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateVariantRequest
 import com.invictoprojects.streetlyshop.web.exception.UserNotAuthorizedException
-import org.bson.types.Decimal128
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
@@ -102,29 +102,3 @@ class VariantService(
     }
 }
 
-fun Variant.toDTO(): VariantDTO {
-    return VariantDTO(
-        id = id.toString(),
-        barcode = barcode,
-        productId = productId.toString(),
-        contentId = contentId.toString(),
-        medias = medias,
-        attributes = attributes.map { it.toDTO() },
-        creationDate = creationDate,
-        modifiedDate = modifiedDate,
-        prices = prices.mapValues { (_, price) -> price.toDTO() },
-        stock = stock.toDTO()
-    )
-}
-
-fun Price.toDTO(): PriceDTO {
-    return PriceDTO(salePrice = salePrice.bigDecimalValue(), originalPrice = originalPrice.bigDecimalValue())
-}
-
-fun Stock.toDTO(): StockDTO {
-    return StockDTO(quantity)
-}
-
-fun BigDecimal.toDecimal128(): Decimal128 {
-    return Decimal128(this)
-}
