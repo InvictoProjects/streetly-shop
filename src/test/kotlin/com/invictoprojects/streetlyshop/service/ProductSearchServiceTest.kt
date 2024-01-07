@@ -9,6 +9,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantInfo
+import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.web.controller.request.ProductSearchRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.bson.types.ObjectId
@@ -89,5 +90,4 @@ internal class ProductSearchServiceTest {
         assertThat(actualResult).isEqualTo(productSearchResult.toDTO())
     }
 
-    private fun <T> any(): T = Mockito.any()
 }

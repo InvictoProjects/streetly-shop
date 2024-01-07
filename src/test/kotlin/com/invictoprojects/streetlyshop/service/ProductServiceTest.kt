@@ -7,6 +7,10 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Categor
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
+import com.invictoprojects.streetlyshop.util.capture
+import com.invictoprojects.streetlyshop.util.toAttribute
+import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateProductRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateProductRequest
@@ -24,7 +28,6 @@ import org.mockito.BDDMockito.given
 import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.junit.jupiter.MockitoExtension
@@ -70,7 +73,6 @@ internal class ProductServiceTest {
 
     @Test
     fun createProduct_requestIsValid_productIsCreated() {
-        // given
         val attribute = AttributeDTO(id = ObjectId().toString(), valueId = ObjectId().toString())
         val categoryId = ObjectId()
         val request = CreateProductRequest(
@@ -87,10 +89,8 @@ internal class ProductServiceTest {
 
         given(productRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Product>())
 
-        // when
         val productDTO = productService.createProduct(request)
 
-        // then
         verify(productRepository).save(capture(productCaptor))
 
         val actualProduct = productCaptor.value
@@ -103,37 +103,30 @@ internal class ProductServiceTest {
 
     @Test
     fun getProduct_productExists_productDTOIsReturned() {
-        // given
         val productId = ObjectId()
         val product = Product(id = productId, categoryId = ObjectId(), createdBy = ObjectId())
 
         given(productRepository.getByIdAggregated(productId, Language.En)).willReturn(product)
 
-        // when
         val productDTO = productService.getProduct(productId.toString(), Language.En)
 
-        // then
         assertThat(productDTO).isEqualTo(product.toDTO())
     }
 
     @Test
     fun updateProduct_productDoesNotExist_exceptionIsThrown() {
-        // given
         val productId = ObjectId()
         val request = UpdateProductRequest(categoryId = ObjectId().toString())
 
         given(productRepository.getById(productId)).willThrow(ProductNotFoundException("error"))
 
-        // when
         val throwable = catchThrowable { productService.updateProduct(productId.toString(), request) }
 
-        // then
         assertThat(throwable).isInstanceOf(ProductNotFoundException::class.java)
     }
 
     @Test
     fun updateProduct_userIsNotAuthorized_exceptionIsThrown() {
-        // given
         val productId = ObjectId()
         val request = UpdateProductRequest(categoryId = ObjectId().toString())
 
@@ -144,16 +137,13 @@ internal class ProductServiceTest {
         val authentication = UsernamePasswordAuthenticationToken(currentUserId.toString(), null)
         given(authenticationFacade.getAuthentication()).willReturn(authentication)
 
-        // when
         val throwable = catchThrowable { productService.updateProduct(productId.toString(), request) }
 
-        // then
         assertThat(throwable).isInstanceOf(UserNotAuthorizedException::class.java)
     }
 
     @Test
     fun updateProduct_requestIsValid_productIsUpdated() {
-        // given
         val productId = ObjectId()
         val categoryId = ObjectId()
 
@@ -179,10 +169,8 @@ internal class ProductServiceTest {
 
         given(productRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Product>())
 
-        // when
         val productDTO = productService.updateProduct(productId.toString(), request)
 
-        // then
         verify(productRepository).save(capture(productCaptor))
 
         val actualProduct = productCaptor.value
@@ -195,6 +183,4 @@ internal class ProductServiceTest {
         assertThat(productDTO).isEqualTo(actualProduct.toDTO())
     }
 
-    private fun <T> any(): T = Mockito.any()
-    private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
 }
