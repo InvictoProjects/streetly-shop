@@ -1,0 +1,16 @@
+{
+      $set: {
+        "prices.%{currency}.salePrice": {
+          $multiply: [
+            "$prices.UAH.salePrice",
+            NumberDecimal("%{exchangeRate}")
+          ]
+        },
+        "prices.%{currency}.originalPrice": {
+          $multiply: [
+            "$prices.UAH.originalPrice",
+            NumberDecimal("%{exchangeRate}")
+          ]
+        }
+      }
+}

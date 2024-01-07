@@ -1,0 +1,35 @@
+[
+  {$match: {"_id": ObjectId("%{productId}")}},
+  {$unwind: "$attributes"},
+  {$lookup: {
+    from: "%{attributeDefinitionsCollection}",
+    localField: "attributes._id",
+    foreignField: "_id",
+    as: "attributes.definitions"
+    }
+  },
+  {$lookup: {
+    from: "%{attributeValuesCollection}",
+    localField: "attributes.valueId",
+    foreignField:
+    "_id", as: "attributes.values"
+    }
+  },
+  {$lookup: {from: "%{categoriesCollection}", localField: "categoryId", foreignField: "_id", as: "categories"}},
+  { $set: {
+    "attributes.value": {$arrayElemAt: [ "$attributes.values", 0 ] },
+    "attributes.definition": {$arrayElemAt: [ "$attributes.definitions", 0 ] }
+    "category": {$arrayElemAt: [ "$categories", 0 ] }
+  } },
+  {$lookup: {
+    from: "%{attributeValuesCollection}",
+    localField: "attributes.definition.valueIds",
+    foreignField: "_id",
+    as: "attributes.definition.values"
+    }
+  },
+  {$group: {"_id": "$_id", "attributes": {$push: "$attributes"}, "product": { "$first": "$$ROOT" }}},
+  {$replaceRoot: { "newRoot": { $mergeObjects: [ "$product", "$$ROOT"] }}},
+  {$lookup: {from: "%{reviewsCollection}", localField: "reviewIds", foreignField: "_id", as: "reviews"}}
+]
+

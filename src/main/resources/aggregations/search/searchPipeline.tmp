@@ -1,0 +1,19 @@
+{$lookup: {from: "%{productsCollection}", localField: "productId", foreignField: "_id", as: "products"}},
+{ $set: {"product": {$arrayElemAt: [ "$products", 0 ]}, "contentId": "$_id"}},
+{ $unset: "products"},
+
+%{productPropertiesSearchFilters},
+
+{ $lookup: {from: "%{variantsCollection}", localField: "variantIds", foreignField: "_id", as: "variants"}},
+{ $unwind: "$variants"},
+
+%{variantPropertiesSearchFilters},
+
+{ $set: {"allAttributes": {$concatArrays: [ "$attributes", "$product.attributes", "$variants.attributes"] }} },
+
+%{attributesMatchStage}
+
+{ $group: {_id: "$product._id", doc: { $first: "$$ROOT" }}},
+{ $replaceRoot: {newRoot: "$doc"}},
+
+%{sortStage}

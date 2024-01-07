@@ -1,0 +1,13 @@
+[
+  {$match: {"_id": ObjectId("%{variantId}")}},
+  {$unwind: "$attributes"},
+  {$lookup: {from: "%{attributeDefinitionsCollection}", localField: "attributes._id", foreignField: "_id", as: "attributes.definitions"}},
+  {$lookup: {from: "%{attributeValuesCollection}", localField: "attributes.valueId", foreignField: "_id", as: "attributes.values"}},
+  { $set: {
+    "attributes.value": {$arrayElemAt: [ "$attributes.values", 0 ] },
+    "attributes.definition": {$arrayElemAt: [ "$attributes.definitions", 0 ] }
+  } },
+  {$lookup: {from: "%{attributeValuesCollection}", localField: "attributes.definition.valueIds", foreignField: "_id", as: "attributes.definition.values"}},
+  {$group: {"_id": "$_id", "attributes": {$push: "$attributes"}, "variant": { "$first": "$$ROOT" }}},
+  {$replaceRoot: { "newRoot": { $mergeObjects: [ "$variant", "$$ROOT"] }}}
+]
