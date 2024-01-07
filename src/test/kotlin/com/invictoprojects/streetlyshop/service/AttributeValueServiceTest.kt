@@ -30,10 +30,10 @@ internal class AttributeValueServiceTest {
         val attributeId = ObjectId()
 
         val attributeValue = AttributeValue(
-                id = attributeValueId,
-                attributeId = attributeId,
-                name = "Light Red",
-                languageCode = Language.En
+            id = attributeValueId,
+            attributeId = attributeId,
+            name = "Light Red",
+            languageCode = Language.En
         )
         given(attributeValueRepository.getById(attributeValueId, Language.En)).willReturn(attributeValue)
 

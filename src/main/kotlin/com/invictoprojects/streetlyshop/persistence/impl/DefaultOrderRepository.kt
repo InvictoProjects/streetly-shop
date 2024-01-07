@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class DefaultOrderRepository(
-        @Value("\${mongodb.collection.orders}")
-        val ordersCollection: String,
-        val mongoTemplate: MongoTemplate
+    @Value("\${mongodb.collection.orders}")
+    val ordersCollection: String,
+    val mongoTemplate: MongoTemplate
 ) : OrderRepository {
 
     override fun save(order: Order): Order {

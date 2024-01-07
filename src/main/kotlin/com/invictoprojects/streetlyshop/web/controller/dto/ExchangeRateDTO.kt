@@ -4,6 +4,6 @@ import java.math.BigDecimal
 import java.time.Instant
 
 data class ExchangeRateDTO(
-        var modifiedDate: Instant,
-        var rate: BigDecimal
+    var modifiedDate: Instant,
+    var rate: BigDecimal
 )

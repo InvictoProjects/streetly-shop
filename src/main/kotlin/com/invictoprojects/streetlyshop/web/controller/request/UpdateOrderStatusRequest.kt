@@ -4,6 +4,6 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderStat
 import javax.validation.constraints.NotNull
 
 data class UpdateOrderStatusRequest(
-        @field:NotNull
-        val status: OrderStatus? = null
+    @field:NotNull
+    val status: OrderStatus? = null
 )

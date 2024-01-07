@@ -21,10 +21,10 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class OrderService(
-        private val orderRepository: OrderRepository,
-        private val variantRepository: VariantRepository,
-        private val customerRepository: CustomerRepository,
-        private val authenticationFacade: AuthenticationFacade
+    private val orderRepository: OrderRepository,
+    private val variantRepository: VariantRepository,
+    private val customerRepository: CustomerRepository,
+    private val authenticationFacade: AuthenticationFacade
 ) {
 
     @Transactional
@@ -58,17 +58,17 @@ class OrderService(
 
     private fun getOrder(customer: Customer, request: CreateOrderRequest, orderLines: List<OrderLine>): Order {
         return Order(
-                id = ObjectId(),
-                customerId = customer.id!!,
-                customer = customer,
-                deliveryService = request.deliveryService!!,
-                city = request.city!!,
-                department = request.department!!,
-                recipientName = request.recipientName!!,
-                recipientSurname = request.recipientSurname!!,
-                recipientMiddleName = request.recipientMiddleName!!,
-                lines = orderLines,
-                status = OrderStatus.AWAITING_PAYMENT
+            id = ObjectId(),
+            customerId = customer.id!!,
+            customer = customer,
+            deliveryService = request.deliveryService!!,
+            city = request.city!!,
+            department = request.department!!,
+            recipientName = request.recipientName!!,
+            recipientSurname = request.recipientSurname!!,
+            recipientMiddleName = request.recipientMiddleName!!,
+            lines = orderLines,
+            status = OrderStatus.AWAITING_PAYMENT
         )
     }
 
@@ -89,18 +89,18 @@ fun OrderLine.toDTO(): OrderLineDTO {
 
 fun Order.toDTO(): OrderDTO {
     return OrderDTO(
-            id = id.toString(),
-            customerId = customerId.toString(),
-            customer = customer.toDTO(),
-            creationDate = creationDate,
-            modifiedDate = modifiedDate,
-            deliveryService = deliveryService,
-            city = city,
-            department = department,
-            recipientName = recipientName,
-            recipientSurname = recipientSurname,
-            recipientMiddleName = recipientMiddleName,
-            status = status,
-            lines = lines.map { it.toDTO() }
+        id = id.toString(),
+        customerId = customerId.toString(),
+        customer = customer.toDTO(),
+        creationDate = creationDate,
+        modifiedDate = modifiedDate,
+        deliveryService = deliveryService,
+        city = city,
+        department = department,
+        recipientName = recipientName,
+        recipientSurname = recipientSurname,
+        recipientMiddleName = recipientMiddleName,
+        status = status,
+        lines = lines.map { it.toDTO() }
     )
 }

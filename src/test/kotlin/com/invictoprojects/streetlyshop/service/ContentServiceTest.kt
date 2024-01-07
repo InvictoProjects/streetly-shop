@@ -67,7 +67,7 @@ internal class ContentServiceTest {
         )
 
         given(attributeService.validateAttributes(mutableListOf(attribute)))
-                .willThrow(InvalidAttributeException("Error"))
+            .willThrow(InvalidAttributeException("Error"))
 
         val throwable = catchThrowable { contentService.createContent(request) }
 

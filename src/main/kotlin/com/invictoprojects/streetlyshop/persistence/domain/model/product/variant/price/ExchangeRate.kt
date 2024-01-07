@@ -10,10 +10,10 @@ import java.time.Instant
 
 @Document("exchangeRates")
 data class ExchangeRate(
-        @field:Id
-        val id: String,
-        var modifiedDate: Instant = Instant.now(),
-        var rate: Decimal128
+    @field:Id
+    val id: String,
+    var modifiedDate: Instant = Instant.now(),
+    var rate: Decimal128
 ) {
     fun updateRate(rate: BigDecimal): ExchangeRate {
         this.rate = rate.toDecimal128()

@@ -20,7 +20,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/v1/api/attribute/value")
 class AttributeValueController(
-        val attributeValueService: AttributeValueService
+    val attributeValueService: AttributeValueService
 ) {
 
     @ApiOperation("Update attribute value name")

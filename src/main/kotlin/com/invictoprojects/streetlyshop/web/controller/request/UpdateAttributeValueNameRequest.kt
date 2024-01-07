@@ -5,8 +5,8 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 data class UpdateAttributeValueNameRequest(
-        @field:NotBlank
-        val name: String?,
-        @field:NotNull
-        val language: Language?
+    @field:NotBlank
+    val name: String?,
+    @field:NotNull
+    val language: Language?
 )

@@ -21,10 +21,10 @@ class AttributeService(val attributeValueService: AttributeValueService) {
 
 fun Attribute.toDTO(): AttributeDTO {
     return AttributeDTO(
-            id = id.toString(),
-            valueId = valueId.toString(),
-            definition = definition?.toDTO(),
-            value = value?.toDTO()
+        id = id.toString(),
+        valueId = valueId.toString(),
+        definition = definition?.toDTO(),
+        value = value?.toDTO()
     )
 }
 

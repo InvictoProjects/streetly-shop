@@ -9,5 +9,5 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 class StreetlyShopApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<StreetlyShopApiApplication>(*args)
+    runApplication<StreetlyShopApiApplication>(*args)
 }

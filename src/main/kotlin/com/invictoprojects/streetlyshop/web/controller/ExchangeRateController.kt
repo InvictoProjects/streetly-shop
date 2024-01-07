@@ -20,16 +20,16 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/v1/api/exchange-rate")
 class ExchangeRateController(
-        val exchangeRateService: ExchangeRateService
+    val exchangeRateService: ExchangeRateService
 ) {
 
     @ApiOperation("Update exchange rate")
     @PutMapping
     fun updateRate(@Valid @RequestBody request: UpdateExchangeRateRequest) =
-            exchangeRateService.updateExchangeRate(request)
+        exchangeRateService.updateExchangeRate(request)
 
     @ApiOperation("Get exchange rate by currency")
     @GetMapping("{currency}")
     fun getExchangeRate(@PathVariable currency: Currency): ExchangeRateDTO =
-            exchangeRateService.getExchangeRateDTO(currency)
+        exchangeRateService.getExchangeRateDTO(currency)
 }

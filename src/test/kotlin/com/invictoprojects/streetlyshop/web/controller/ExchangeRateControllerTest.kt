@@ -49,8 +49,8 @@ internal class ExchangeRateControllerTest {
         val request = UpdateExchangeRateRequest(rate = null, currency = Currency.EUR)
 
         mockMvc.perform(
-                put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest)
 
         verifyNoInteractions(exchangeRateService)
@@ -61,8 +61,8 @@ internal class ExchangeRateControllerTest {
         val request = UpdateExchangeRateRequest(rate = BigDecimal(-1), currency = Currency.EUR)
 
         mockMvc.perform(
-                put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest)
 
         verifyNoInteractions(exchangeRateService)
@@ -73,8 +73,8 @@ internal class ExchangeRateControllerTest {
         val request = UpdateExchangeRateRequest(rate = BigDecimal.ONE, currency = null)
 
         mockMvc.perform(
-                put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest)
 
         verifyNoInteractions(exchangeRateService)
@@ -85,8 +85,8 @@ internal class ExchangeRateControllerTest {
         val request = UpdateExchangeRateRequest(rate = BigDecimal.ONE, currency = Currency.EUR)
 
         mockMvc.perform(
-                put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/exchange-rate").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
 
         verify(exchangeRateService).updateExchangeRate(request)
@@ -99,13 +99,13 @@ internal class ExchangeRateControllerTest {
         given(exchangeRateService.getExchangeRateDTO(Currency.EUR)).willReturn(rateDTO)
 
         val actualResponse = mockMvc.perform(
-                get("/v1/api/exchange-rate/EUR")
-                        .accept(MediaType.APPLICATION_JSON)
+            get("/v1/api/exchange-rate/EUR")
+                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(status().isOk)
-                .andReturn().response
+            .andExpect(status().isOk)
+            .andReturn().response
 
         AssertionsForInterfaceTypes.assertThat(actualResponse.contentAsString)
-                .isEqualTo(objectMapper.writeValueAsString(rateDTO))
+            .isEqualTo(objectMapper.writeValueAsString(rateDTO))
     }
 }
