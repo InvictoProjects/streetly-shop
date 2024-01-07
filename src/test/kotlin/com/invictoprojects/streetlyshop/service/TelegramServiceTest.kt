@@ -19,24 +19,30 @@ internal class TelegramServiceTest {
 
     private lateinit var telegramService: TelegramService
 
+    companion object {
+        private const val CHAT_ID = "123"
+        private const val TOKEN = "test_token"
+        private const val MESSAGE = "User John wants us to call back"
+    }
+
     @BeforeEach
     fun setup() {
-        telegramService = TelegramService("token", "123", telegramClient)
+        telegramService = TelegramService(TOKEN, CHAT_ID, telegramClient)
     }
 
     @Test
     fun notifyTeam_messageIsValid_messageIsSent() {
-        telegramService.notifyTeam("User John wants us to call back")
+        telegramService.notifyTeam(MESSAGE)
 
-        verify(telegramClient).sendMessage("token", "123", "User John wants us to call back")
+        verify(telegramClient).sendMessage(TOKEN, CHAT_ID, MESSAGE)
     }
 
     @Test
     fun notifyTeam_telegramReturnsError_exceptionIsThrown() {
-        given(telegramClient.sendMessage("token", "123", "User John wants us to call back"))
+        given(telegramClient.sendMessage(TOKEN, CHAT_ID, MESSAGE))
             .willThrow(RuntimeException())
 
-        val throwable = catchThrowable { telegramService.notifyTeam("User John wants us to call back") }
+        val throwable = catchThrowable { telegramService.notifyTeam(MESSAGE) }
 
         assertThat(throwable).isNotNull
     }
