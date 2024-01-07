@@ -18,7 +18,8 @@ import org.springframework.stereotype.Service
 class ProductService(
     private val productRepository: ProductRepository,
     private val categoryRepository: CategoryRepository,
-    private val authenticationFacade: AuthenticationFacade
+    private val authenticationFacade: AuthenticationFacade,
+    private val attributeService: AttributeService
 ) {
     fun createProduct(request: CreateProductRequest): ProductDTO {
         attributeService.validateAttributes(request.attributes)
