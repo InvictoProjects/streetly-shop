@@ -7,6 +7,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Custom
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Gender
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Role
 import com.invictoprojects.streetlyshop.service.model.File
+import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateCustomerDetailsRequest
 import com.invictoprojects.streetlyshop.web.exception.UserAlreadyRegisteredException
 import com.invictoprojects.streetlyshop.web.exception.UserNotFoundException
@@ -307,5 +308,4 @@ internal class CustomerServiceTest {
         roles = mutableListOf(Role.BUYER, Role.SELLER)
     )
 
-    private fun <T> any(): T = Mockito.any()
 }
