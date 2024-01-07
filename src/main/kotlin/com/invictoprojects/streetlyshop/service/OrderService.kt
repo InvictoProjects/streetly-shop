@@ -10,6 +10,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderLine
 import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderStatus
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.OrderDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.OrderLineDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateOrderRequest
@@ -81,26 +82,4 @@ class OrderService(
     fun getOrderDTO(orderId: String): OrderDTO {
         return orderRepository.getById(orderId.toObjectId()).toDTO()
     }
-}
-
-fun OrderLine.toDTO(): OrderLineDTO {
-    return OrderLineDTO(id = id.toString(), variantInfo = variantInfo.toDTO(), quantity = quantity)
-}
-
-fun Order.toDTO(): OrderDTO {
-    return OrderDTO(
-        id = id.toString(),
-        customerId = customerId.toString(),
-        customer = customer.toDTO(),
-        creationDate = creationDate,
-        modifiedDate = modifiedDate,
-        deliveryService = deliveryService,
-        city = city,
-        department = department,
-        recipientName = recipientName,
-        recipientSurname = recipientSurname,
-        recipientMiddleName = recipientMiddleName,
-        status = status,
-        lines = lines.map { it.toDTO() }
-    )
 }
