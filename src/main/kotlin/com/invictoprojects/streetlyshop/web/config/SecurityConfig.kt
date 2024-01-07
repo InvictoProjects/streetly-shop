@@ -58,6 +58,10 @@ class SecurityConfig {
 
             .antMatchers("/v1/api/notification/callback").permitAll()
 
+            .antMatchers(HttpMethod.POST, "/v1/api/order").hasAnyRole(Role.BUYER.name)
+            .antMatchers(HttpMethod.PUT, "/v1/api/order/*").hasRole(Role.ADMIN.name)
+            .antMatchers(HttpMethod.GET, "/v1/api/order/*").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
+
             .antMatchers(HttpMethod.POST, "/v1/api/product").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.PUT, "/v1/api/product/*").hasAnyRole(Role.SELLER.name, Role.ADMIN.name)
             .antMatchers(HttpMethod.GET, "/v1/api/product/*/*").permitAll()
