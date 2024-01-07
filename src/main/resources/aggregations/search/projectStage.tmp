@@ -1,0 +1,6 @@
+{
+  $project: {
+    totalCount: { $arrayElemAt: ["$totalCount.count", 0] },
+    paginatedResults: 1
+  }
+}
