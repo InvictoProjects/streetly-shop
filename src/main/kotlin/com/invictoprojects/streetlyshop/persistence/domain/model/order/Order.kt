@@ -8,20 +8,20 @@ import java.time.Instant
 
 @Document
 data class Order(
-        @field:Id
-        val id: ObjectId,
-        val customerId: ObjectId,
-        val customer: Customer,
-        val creationDate: Instant = Instant.now(),
-        var modifiedDate: Instant = Instant.now(),
-        var deliveryService: String,
-        var city: String,
-        var department: String,
-        val recipientName: String,
-        val recipientSurname: String,
-        val recipientMiddleName: String,
-        val lines: List<OrderLine>,
-        var status: OrderStatus
+    @field:Id
+    val id: ObjectId,
+    val customerId: ObjectId,
+    val customer: Customer,
+    val creationDate: Instant = Instant.now(),
+    var modifiedDate: Instant = Instant.now(),
+    var deliveryService: String,
+    var city: String,
+    var department: String,
+    val recipientName: String,
+    val recipientSurname: String,
+    val recipientMiddleName: String,
+    val lines: List<OrderLine>,
+    var status: OrderStatus
 ) {
     fun updateStatus(status: OrderStatus) {
         this.status = status

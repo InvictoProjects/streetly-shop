@@ -45,8 +45,8 @@ internal class AttributeValueControllerTest {
 
         val attributeValueId = ObjectId().toString()
         mockMvc.perform(
-                put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest)
 
         verifyNoInteractions(attributeValueService)
@@ -58,8 +58,8 @@ internal class AttributeValueControllerTest {
 
         val attributeValueId = ObjectId().toString()
         mockMvc.perform(
-                put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest)
 
         verifyNoInteractions(attributeValueService)
@@ -71,8 +71,8 @@ internal class AttributeValueControllerTest {
         val attributeValueId = ObjectId().toString()
 
         mockMvc.perform(
-                put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
+            put("/v1/api/attribute/value/$attributeValueId/name").content(objectMapper.writeValueAsString(request))
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNoContent)
 
         verify(attributeValueService).updateName(ObjectId(attributeValueId), request)

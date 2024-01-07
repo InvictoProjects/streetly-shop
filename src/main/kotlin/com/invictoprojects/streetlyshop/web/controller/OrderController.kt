@@ -15,18 +15,18 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/v1/api/order")
 class OrderController(
-        val orderService: OrderService
+    val orderService: OrderService
 ) {
 
     @ApiOperation("Create order")
     @PostMapping
     fun createOrder(@Valid @RequestBody request: CreateOrderRequest): OrderDTO =
-            orderService.createOrder(request)
+        orderService.createOrder(request)
 
     @ApiOperation("Update order status")
     @PutMapping("{id}")
     fun updateOrderStatus(@PathVariable id: String, @Valid @RequestBody request: UpdateOrderStatusRequest): OrderDTO =
-            orderService.updateStatus(id, request)
+        orderService.updateStatus(id, request)
 
     @ApiOperation("Get order by id")
     @GetMapping("{id}")

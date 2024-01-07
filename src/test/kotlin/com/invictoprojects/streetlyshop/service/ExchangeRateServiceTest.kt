@@ -47,8 +47,8 @@ internal class ExchangeRateServiceTest {
     @Test
     fun getByCurrency_currencyIsValid_rateIsReturned() {
         val exchangeRate = ExchangeRate(
-                id = "UAH-PLN",
-                rate = Decimal128(1)
+            id = "UAH-PLN",
+            rate = Decimal128(1)
         )
         given(exchangeRateRepository.findById("UAH-PLN")).willReturn(Optional.of(exchangeRate))
 
@@ -60,8 +60,8 @@ internal class ExchangeRateServiceTest {
     @Test
     fun getExchangeRateDTO_currencyIsValid_rateDTOIsReturned() {
         val exchangeRate = ExchangeRate(
-                id = "UAH-PLN",
-                rate = Decimal128(1)
+            id = "UAH-PLN",
+            rate = Decimal128(1)
         )
         given(exchangeRateRepository.findById("UAH-PLN")).willReturn(Optional.of(exchangeRate))
 
@@ -74,15 +74,15 @@ internal class ExchangeRateServiceTest {
     fun updateExchangeRate_requestIsValid_pricesAreUpdated() {
         // given
         val request = UpdateExchangeRateRequest(
-                rate = BigDecimal.TEN,
-                currency = Currency.PLN
+            rate = BigDecimal.TEN,
+            currency = Currency.PLN
         )
 
         val exchangeRate = spy(
-                ExchangeRate(
-                        id = "UAH-PLN",
-                        rate = Decimal128(1)
-                )
+            ExchangeRate(
+                id = "UAH-PLN",
+                rate = Decimal128(1)
+            )
         )
         given(exchangeRateRepository.findById("UAH-PLN")).willReturn(Optional.of(exchangeRate))
         given(exchangeRateRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<ExchangeRate>())

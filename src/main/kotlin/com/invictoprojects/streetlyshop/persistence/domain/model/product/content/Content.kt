@@ -10,18 +10,18 @@ import java.time.Instant
 
 @Document
 data class Content(
-        @field:Id
-        val id: ObjectId,
-        var productId: ObjectId,
-        var name: String = "",
-        var description: String = "",
-        var attributes: MutableList<Attribute> = mutableListOf(),
-        var variantIds: MutableList<ObjectId> = mutableListOf(),
-        var variants: MutableList<Variant> = mutableListOf(),
-        var languageCode: Language,
-        val creationDate: Instant = Instant.now(),
-        var modifiedDate: Instant = Instant.now(),
-        val createdBy: ObjectId
+    @field:Id
+    val id: ObjectId,
+    var productId: ObjectId,
+    var name: String = "",
+    var description: String = "",
+    var attributes: MutableList<Attribute> = mutableListOf(),
+    var variantIds: MutableList<ObjectId> = mutableListOf(),
+    var variants: MutableList<Variant> = mutableListOf(),
+    var languageCode: Language,
+    val creationDate: Instant = Instant.now(),
+    var modifiedDate: Instant = Instant.now(),
+    val createdBy: ObjectId
 ) {
     fun addVariant(variantId: ObjectId): Content {
         variantIds.add(variantId)

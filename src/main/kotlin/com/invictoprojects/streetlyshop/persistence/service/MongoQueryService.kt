@@ -33,7 +33,9 @@ class MongoQueryService(
         properties["field"] = field
         properties["id"] = objectId.toString()
 
-        return StringSubstitutor.replace(matchObjectIdStage, properties,
+        return StringSubstitutor.replace(
+            matchObjectIdStage,
+            properties,
             PREFIX,
             SUFFIX
         )
@@ -44,7 +46,9 @@ class MongoQueryService(
         properties["field"] = field
         properties["list"] = list.toString()
 
-        return StringSubstitutor.replace(matchInStage, properties,
+        return StringSubstitutor.replace(
+            matchInStage,
+            properties,
             PREFIX,
             SUFFIX
         )
@@ -55,7 +59,9 @@ class MongoQueryService(
         properties["field"] = field
         properties["value"] = value
 
-        return StringSubstitutor.replace(matchGTStage, properties,
+        return StringSubstitutor.replace(
+            matchGTStage,
+            properties,
             PREFIX,
             SUFFIX
         )
@@ -66,7 +72,9 @@ class MongoQueryService(
         properties["field"] = field
         properties["value"] = value
 
-        return StringSubstitutor.replace(matchLTStage, properties,
+        return StringSubstitutor.replace(
+            matchLTStage,
+            properties,
             PREFIX,
             SUFFIX
         )
@@ -77,7 +85,9 @@ class MongoQueryService(
         properties["field"] = productSortingOrder.field
         properties["direction"] = productSortingOrder.direction.toString()
 
-        return StringSubstitutor.replace(sortStage, properties,
+        return StringSubstitutor.replace(
+            sortStage,
+            properties,
             PREFIX,
             SUFFIX
         )
@@ -89,14 +99,18 @@ class MongoQueryService(
         properties["skip"] = (pageSize * (page - 1)).toString()
         properties["limit"] = pageSize.toString()
 
-        return StringSubstitutor.replace(facetStage, properties,
+        return StringSubstitutor.replace(
+            facetStage,
+            properties,
             PREFIX,
             SUFFIX
         )
     }
 
     fun getTextSearchStageJson(query: String): String {
-        return StringSubstitutor.replace(textSearchStage, mutableMapOf(Pair("query", query)),
+        return StringSubstitutor.replace(
+            textSearchStage,
+            mutableMapOf(Pair("query", query)),
             PREFIX,
             SUFFIX
         )

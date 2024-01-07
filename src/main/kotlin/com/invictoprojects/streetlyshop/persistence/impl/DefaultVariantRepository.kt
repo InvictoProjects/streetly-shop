@@ -59,7 +59,9 @@ class DefaultVariantRepository(
             Pair("attributeValuesCollection", getCollection(attributeValuesPrefix, language))
         )
 
-        val aggregation = StringSubstitutor.replace(variantAggregation, params,
+        val aggregation = StringSubstitutor.replace(
+            variantAggregation,
+            params,
             PREFIX,
             SUFFIX
         )
@@ -92,7 +94,9 @@ class DefaultVariantRepository(
 
     override fun updatePricesWithNewExchangeRate(currency: Currency, exchangeRate: BigDecimal) {
         val params = mutableMapOf(Pair("exchangeRate", exchangeRate.toString()), Pair("currency", currency.toString()))
-        val priceAggregation = StringSubstitutor.replace(priceUpdateAggregation, params,
+        val priceAggregation = StringSubstitutor.replace(
+            priceUpdateAggregation,
+            params,
             PREFIX,
             SUFFIX
         )
@@ -104,7 +108,9 @@ class DefaultVariantRepository(
 
     override fun updateStock(id: ObjectId, stockDelta: Long) {
         val params = mutableMapOf(Pair("stockDelta", stockDelta))
-        val stockAggregation = StringSubstitutor.replace(stockUpdateAggregation, params,
+        val stockAggregation = StringSubstitutor.replace(
+            stockUpdateAggregation,
+            params,
             PREFIX,
             SUFFIX
         )
@@ -122,7 +128,9 @@ class DefaultVariantRepository(
             Pair("contentsCollection", getCollection(contentsPrefix, language)),
         )
 
-        val aggregation = StringSubstitutor.replace(variantInfoAggregation, params,
+        val aggregation = StringSubstitutor.replace(
+            variantInfoAggregation,
+            params,
             PREFIX,
             SUFFIX
         )

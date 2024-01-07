@@ -11,9 +11,9 @@ import kotlin.reflect.KClass
 @MustBeDocumented
 @Constraint(validatedBy = [AttributeFilterValidator::class])
 annotation class ValidAttributeFilter(
-        val message: String = "Filter is not valid",
-        val groups: Array<KClass<*>> = [],
-        val payload: Array<KClass<out Payload>> = []
+    val message: String = "Filter is not valid",
+    val groups: Array<KClass<*>> = [],
+    val payload: Array<KClass<out Payload>> = []
 )
 
 class AttributeFilterValidator : ConstraintValidator<ValidAttributeFilter, List<List<String>>> {

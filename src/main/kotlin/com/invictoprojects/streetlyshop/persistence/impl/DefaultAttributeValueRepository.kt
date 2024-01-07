@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class DefaultAttributeValueRepository(
-        @Value("\${mongodb.collection.attribute-values}")
-        val attributeValuesPrefix: String,
-        val mongoTemplate: MongoTemplate
+    @Value("\${mongodb.collection.attribute-values}")
+    val attributeValuesPrefix: String,
+    val mongoTemplate: MongoTemplate
 ) : AttributeValueRepository {
 
     override fun save(attributeValue: AttributeValue): AttributeValue {
@@ -32,6 +32,6 @@ class DefaultAttributeValueRepository(
 
     override fun getById(id: ObjectId, language: Language): AttributeValue {
         return findById(id, language)
-                ?: throw AttributeValueNotFoundException("Attribute value with id $id was not found")
+            ?: throw AttributeValueNotFoundException("Attribute value with id $id was not found")
     }
 }

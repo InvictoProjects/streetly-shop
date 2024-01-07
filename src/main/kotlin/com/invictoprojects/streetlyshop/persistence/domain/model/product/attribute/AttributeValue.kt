@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 data class AttributeValue(
-        @field:Id
-        val id: ObjectId,
-        val attributeId: ObjectId,
-        var name: String,
-        var languageCode: Language
+    @field:Id
+    val id: ObjectId,
+    val attributeId: ObjectId,
+    var name: String,
+    var languageCode: Language
 )

@@ -67,31 +67,31 @@ internal class OrderServiceTest {
         // given
         val variantId = ObjectId("64767ffead10a76bbfb85b66")
         val request = CreateOrderRequest(
-                deliveryService = "Nova Poshta",
-                city = "Kyiv",
-                department = "N24",
-                recipientName = "John",
-                recipientSurname = "Black",
-                recipientMiddleName = "Red",
-                recipientPhone = "380991123456",
-                lines = listOf(OrderLineRequest(variantId = variantId.toString(), quantity = 1))
+            deliveryService = "Nova Poshta",
+            city = "Kyiv",
+            department = "N24",
+            recipientName = "John",
+            recipientSurname = "Black",
+            recipientMiddleName = "Red",
+            recipientPhone = "380991123456",
+            lines = listOf(OrderLineRequest(variantId = variantId.toString(), quantity = 1))
         )
 
         val variantInfo = VariantInfo(
-                contentId = ObjectId(),
+            contentId = ObjectId(),
+            productId = ObjectId(),
+            name = "White T-Shirt",
+            description = "Cool T-Shirt",
+            createdBy = ObjectId(),
+            languageCode = Language.Ua,
+            product = Product(id = ObjectId(), categoryId = ObjectId(), createdBy = ObjectId()),
+            variants = Variant(
+                id = variantId,
+                barcode = "123",
                 productId = ObjectId(),
-                name = "White T-Shirt",
-                description = "Cool T-Shirt",
-                createdBy = ObjectId(),
-                languageCode = Language.Ua,
-                product = Product(id = ObjectId(), categoryId = ObjectId(), createdBy = ObjectId()),
-                variants = Variant(
-                        id = variantId,
-                        barcode = "123",
-                        productId = ObjectId(),
-                        contentId = ObjectId(),
-                        createdBy = ObjectId()
-                )
+                contentId = ObjectId(),
+                createdBy = ObjectId()
+            )
         )
         given(variantRepository.getVariantInfoById(variantId, Language.En)).willReturn(variantInfo)
 

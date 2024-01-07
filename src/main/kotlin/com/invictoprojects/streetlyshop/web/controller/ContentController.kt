@@ -22,13 +22,13 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/v1/api/content")
 class ContentController(
-        val contentService: ContentService
+    val contentService: ContentService
 ) {
 
     @ApiOperation("Create content")
     @PostMapping
     fun createContent(@Valid @RequestBody request: CreateContentRequest): ContentDTO =
-            contentService.createContent(request)
+        contentService.createContent(request)
 
     @ApiOperation("Update content")
     @PutMapping("{id}")
@@ -36,11 +36,11 @@ class ContentController(
         @PathVariable id: String,
         @Valid @RequestBody request: UpdateContentRequest
     ): ContentDTO =
-            contentService.updateContent(id, request)
+        contentService.updateContent(id, request)
 
     @ApiOperation("Get content by id")
     @GetMapping("{id}/{language}")
     fun getContent(@PathVariable id: String, @PathVariable language: Language): ContentDTO =
-            contentService.getContent(id, language)
+        contentService.getContent(id, language)
 }
 
