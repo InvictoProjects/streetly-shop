@@ -6,7 +6,10 @@ import com.invictoprojects.streetlyshop.web.controller.request.ProductSearchRequ
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @Api("Product Search Controller")
@@ -19,6 +22,9 @@ class ProductSearchController(
 
     @ApiOperation("Search products")
     @PostMapping
-    fun searchProduct(@Valid @RequestBody request: ProductSearchRequest): PaginatedProductSearchDTO =
-        productSearchService.search(request)
+    fun searchProduct(
+        @Valid
+        @RequestBody
+        request: ProductSearchRequest
+    ): PaginatedProductSearchDTO = productSearchService.search(request)
 }

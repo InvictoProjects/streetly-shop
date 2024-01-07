@@ -1,9 +1,12 @@
 package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.ProductRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
 import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
-import com.invictoprojects.streetlyshop.persistence.domain.model.product.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.PaginatedProductSearch
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductSortingOrder
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantInfo
 import com.invictoprojects.streetlyshop.web.controller.request.ProductSearchRequest
@@ -11,14 +14,14 @@ import org.assertj.core.api.Assertions.assertThat
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 import java.math.BigDecimal
 import java.time.Instant
-import java.util.*
-
 
 @ExtendWith(MockitoExtension::class)
 internal class ProductSearchServiceTest {

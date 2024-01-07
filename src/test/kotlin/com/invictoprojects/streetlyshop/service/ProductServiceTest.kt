@@ -2,7 +2,7 @@ package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.CategoryRepository
 import com.invictoprojects.streetlyshop.persistence.ProductRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Category
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.ProductStatus
@@ -18,22 +18,26 @@ import org.assertj.core.api.Assertions.catchThrowable
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
+import org.mockito.ArgumentCaptor
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.Captor
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import java.util.*
-
 
 @ExtendWith(MockitoExtension::class)
 internal class ProductServiceTest {
 
     @Mock
-    lateinit var productRepository: com.invictoprojects.streetlyshop.persistence.ProductRepository
+    lateinit var productRepository: ProductRepository
 
     @Mock
-    lateinit var categoryRepository: com.invictoprojects.streetlyshop.persistence.CategoryRepository
+    lateinit var categoryRepository: CategoryRepository
 
     @Mock
     lateinit var attributeService: AttributeService

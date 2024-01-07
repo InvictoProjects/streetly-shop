@@ -2,7 +2,7 @@ package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.ContentRepository
 import com.invictoprojects.streetlyshop.persistence.ProductRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.Attribute
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeDefinition
@@ -19,13 +19,20 @@ import org.assertj.core.api.Assertions.catchThrowable
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
+import org.mockito.ArgumentCaptor
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.Captor
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.never
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import java.util.*
-
 
 @ExtendWith(MockitoExtension::class)
 internal class ContentServiceTest {
@@ -59,7 +66,8 @@ internal class ContentServiceTest {
             attributes = mutableListOf(attribute)
         )
 
-        given(attributeService.validateAttributes(mutableListOf(attribute))).willThrow(InvalidAttributeException("Error"))
+        given(attributeService.validateAttributes(mutableListOf(attribute)))
+            .willThrow(InvalidAttributeException("Error"))
 
         val throwable = catchThrowable { contentService.createContent(request) }
 

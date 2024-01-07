@@ -7,7 +7,9 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.web.validator.ValidAttributeFilter
 import java.math.BigDecimal
 import java.time.Instant
-import javax.validation.constraints.*
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotNull
 
 data class ProductSearchRequest(
     val query: String? = null,
