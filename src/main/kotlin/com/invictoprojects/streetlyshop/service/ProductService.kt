@@ -6,6 +6,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.toAttribute
+import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.ProductDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateProductRequest
@@ -74,23 +76,4 @@ class ProductService(
         val category = categoryRepository.getById(categoryId, Language.En)
         product.updateCategoryId(category.id)
     }
-}
-
-fun Product.toDTO(): ProductDTO {
-    return ProductDTO(
-        id = id.toString(),
-        categoryId = categoryId.toString(),
-        category = category?.toDTO(),
-        creationDate = creationDate,
-        modifiedDate = modifiedDate,
-        contentIds = contentIds.map { it.toString() },
-        contents = contents.map { it.toDTO() },
-        attributes = attributes.map { it.toDTO() },
-        status = status,
-        rating = rating,
-        reviewCount = reviewCount,
-        reviewIds = reviewIds.map { it.toString() },
-        reviews = reviews.map { it.toDTO() },
-        favoriteCount = favoriteCount
-    )
 }
