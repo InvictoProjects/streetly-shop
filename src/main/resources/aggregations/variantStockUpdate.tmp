@@ -1,0 +1,11 @@
+{
+  $set: {
+    "stock.quantity": {
+        $cond: {
+                 if: { $gte: [{ $add: ["$stock.quantity", %{stockDelta}] }, 0] },
+                 then: { $add: ["$stock.quantity", %{stockDelta}] },
+                 else: "$stock.quantity"
+               }
+    }
+  }
+}
