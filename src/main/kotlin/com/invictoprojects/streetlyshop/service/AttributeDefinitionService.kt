@@ -6,7 +6,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeDefinition
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeValue
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDefinitionDTO
-import com.invictoprojects.streetlyshop.web.controller.dto.AttributeValueDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AddAttributeDefinitionRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateAttributeNameRequest
 import org.bson.types.ObjectId
@@ -85,12 +85,4 @@ class AttributeDefinitionService(
 
         return attributeDefinitionsForEachLanguage.first { it.languageCode == Language.En }
     }
-}
-
-fun AttributeDefinition.toDTO(): AttributeDefinitionDTO {
-    return AttributeDefinitionDTO(id.toString(), name, starred, searchable, priority, values?.map { it.toDTO() })
-}
-
-fun AttributeValue.toDTO(): AttributeValueDTO {
-    return AttributeValueDTO(id.toString(), name)
 }

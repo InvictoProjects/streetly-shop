@@ -4,6 +4,7 @@ import com.invictoprojects.streetlyshop.persistence.ExchangeRateRepository
 import com.invictoprojects.streetlyshop.persistence.VariantRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
+import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateExchangeRateRequest
 import com.invictoprojects.streetlyshop.web.exception.ExchangeRateNotFoundException
 import org.assertj.core.api.Assertions.assertThat
@@ -72,7 +73,6 @@ internal class ExchangeRateServiceTest {
 
     @Test
     fun updateExchangeRate_requestIsValid_pricesAreUpdated() {
-        // given
         val request = UpdateExchangeRateRequest(
             rate = BigDecimal.TEN,
             currency = Currency.PLN
@@ -87,15 +87,12 @@ internal class ExchangeRateServiceTest {
         given(exchangeRateRepository.findById("UAH-PLN")).willReturn(Optional.of(exchangeRate))
         given(exchangeRateRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<ExchangeRate>())
 
-        // when
         val exchangeRateDTO = exchangeRateService.updateExchangeRate(request)
 
-        // then
         verify(exchangeRate).updateRate(BigDecimal.TEN)
         verify(variantRepository).updatePricesWithNewExchangeRate(Currency.PLN, BigDecimal.TEN)
 
         assertThat(exchangeRateDTO.rate).isEqualTo(BigDecimal.TEN)
     }
 
-    private fun <T> any(): T = Mockito.any()
 }

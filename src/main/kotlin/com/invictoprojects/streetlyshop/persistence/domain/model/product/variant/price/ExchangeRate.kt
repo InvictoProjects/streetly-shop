@@ -1,7 +1,7 @@
 package com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price
 
 import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
-import com.invictoprojects.streetlyshop.service.toDecimal128
+import com.invictoprojects.streetlyshop.util.toDecimal128
 import org.bson.types.Decimal128
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

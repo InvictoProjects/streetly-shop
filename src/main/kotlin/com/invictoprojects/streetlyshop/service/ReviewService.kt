@@ -12,6 +12,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.web.controller.dto.ReviewDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AddReviewRequest
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
@@ -67,20 +68,4 @@ class ReviewService(
 
         productRepository.save(product)
     }
-}
-
-fun Review.toDTO(): ReviewDTO {
-    return ReviewDTO(
-        id = id.toString(),
-        productId = productId.toString(),
-        contentId = contentId.toString(),
-        variantId = variantId.toString(),
-        createdBy = createdBy.toString(),
-        customerName = customerName,
-        customerAvatar = customerAvatar,
-        creationDate = creationDate,
-        medias = medias.map { it.toDTO() }.toMutableList(),
-        text = text,
-        rating = rating
-    )
 }

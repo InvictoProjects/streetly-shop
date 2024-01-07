@@ -9,7 +9,10 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribu
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeValue
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.content.Content
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
+import com.invictoprojects.streetlyshop.util.capture
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateContentRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateContentRequest
 import com.invictoprojects.streetlyshop.web.exception.InvalidAttributeException
@@ -25,7 +28,6 @@ import org.mockito.BDDMockito.given
 import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.times
@@ -107,7 +109,6 @@ internal class ContentServiceTest {
 
     @Test
     fun createContent_requestIsValid_contentsForEachLanguageAreCreated() {
-        // given
         val attribute = AttributeDTO(id = ObjectId().toString(), valueId = ObjectId().toString())
         val productId = ObjectId()
         val request = CreateContentRequest(
@@ -131,10 +132,8 @@ internal class ContentServiceTest {
         given(productRepository.getById(productId)).willReturn(product)
         given(contentRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Content>())
 
-        // when
         val contentDTO = contentService.createContent(request)
 
-        // then
         verify(product).addContent(any())
         verify(productRepository).save(product)
 
@@ -225,7 +224,6 @@ internal class ContentServiceTest {
 
     @Test
     fun updateContent_requestAndUserAreValid_contentIsUpdated() {
-        // given
         val contentId = ObjectId()
         val createdBy = ObjectId()
         val attribute = AttributeDTO(id = ObjectId().toString(), valueId = ObjectId().toString())
@@ -249,10 +247,8 @@ internal class ContentServiceTest {
 
         given(contentRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Content>())
 
-        // when
         val contentDTO = contentService.updateContent(contentId.toString(), request)
 
-        // then
         verify(contentRepository).save(capture(contentCaptor))
 
         val actualContent = contentCaptor.value
@@ -265,6 +261,4 @@ internal class ContentServiceTest {
         assertThat(contentDTO).isEqualTo(actualContent.toDTO())
     }
 
-    private fun <T> any(): T = Mockito.any()
-    private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
 }

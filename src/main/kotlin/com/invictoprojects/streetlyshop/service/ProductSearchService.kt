@@ -5,8 +5,10 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Paginat
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantInfo
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.model.ProductSearchAggregation
+import com.invictoprojects.streetlyshop.util.toDecimal128
 import com.invictoprojects.streetlyshop.web.controller.dto.PaginatedProductSearchDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.VariantInfoDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.ProductSearchRequest
 import org.springframework.stereotype.Service
 

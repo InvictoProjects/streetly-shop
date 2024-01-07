@@ -7,7 +7,9 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.content.Content
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.toAttribute
 import com.invictoprojects.streetlyshop.web.controller.dto.ContentDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateContentRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateContentRequest
 import com.invictoprojects.streetlyshop.web.exception.UserNotAuthorizedException
@@ -92,16 +94,3 @@ class ContentService(
     }
 }
 
-fun Content.toDTO(): ContentDTO {
-    return ContentDTO(
-        id = id.toString(),
-        productId = productId.toString(),
-        name = name,
-        description = description,
-        variantIds = variantIds.map { it.toString() },
-        variants = variants.map { it.toDTO() },
-        attributes = attributes.map { it.toDTO() },
-        creationDate = creationDate,
-        modifiedDate = modifiedDate
-    )
-}

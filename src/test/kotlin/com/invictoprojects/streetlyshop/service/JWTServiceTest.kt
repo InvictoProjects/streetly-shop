@@ -59,7 +59,7 @@ internal class JWTServiceTest {
         val rolesString = claims["roles"] as String
 
         AssertionsForInterfaceTypes.assertThat(userId).isEqualTo(user.id!!.toString())
-        AssertionsForInterfaceTypes.assertThat(rolesString).isEqualTo("ROLE_BUYER, ROLE_ADMIN")
+        AssertionsForInterfaceTypes.assertThat(rolesString).isEqualTo("${Role.BUYER.role}, ${Role.ADMIN.role}")
     }
 
     @Test
@@ -116,10 +116,10 @@ internal class JWTServiceTest {
         val key = Keys.hmacShaKeyFor(jwtKey.toByteArray())
 
         val token = Jwts.builder()
-            .setIssuer("Mono")
+            .setIssuer("Streetly-shop")
             .setSubject("JWT Token")
             .claim("userId", userId)
-            .claim("roles", "ROLE_BUYER, ROLE_ADMIN")
+            .claim("roles", "${Role.BUYER.role}, ${Role.ADMIN.role}")
             .setIssuedAt(Date(currentTime - 60000))
             .setExpiration(Date(currentTime - 20000))
             .signWith(key)
@@ -138,10 +138,10 @@ internal class JWTServiceTest {
         val key = Keys.hmacShaKeyFor(otherKey.toByteArray())
 
         val token = Jwts.builder()
-            .setIssuer("Mono")
+            .setIssuer("Streetly-shop")
             .setSubject("JWT Token")
             .claim("userId", userId)
-            .claim("roles", "ROLE_BUYER, ROLE_ADMIN")
+            .claim("roles", "${Role.BUYER.role}, ${Role.ADMIN.role}")
             .setIssuedAt(Date(currentTime - 60000))
             .setExpiration(Date(currentTime + 60000))
             .signWith(key)
@@ -168,10 +168,10 @@ internal class JWTServiceTest {
         val key = Keys.hmacShaKeyFor(jwtKey.toByteArray())
 
         val token = Jwts.builder()
-            .setIssuer("Mono")
+            .setIssuer("Streetly-shop")
             .setSubject("JWT Token")
             .claim("userId", userId)
-            .claim("roles", "ROLE_BUYER, ROLE_ADMIN")
+            .claim("roles", "${Role.BUYER.role}, ${Role.ADMIN.role}")
             .setIssuedAt(Date(currentTime - 60000))
             .setExpiration(Date(currentTime + 60000))
             .signWith(key)
@@ -180,8 +180,8 @@ internal class JWTServiceTest {
         val authentication = jwtService.authenticate(token)
 
         assertThat(authentication.name).isEqualTo(userId)
-        assertThat(authentication.authorities).contains(SimpleGrantedAuthority("ROLE_BUYER"))
-        assertThat(authentication.authorities).contains(SimpleGrantedAuthority("ROLE_ADMIN"))
+        assertThat(authentication.authorities).contains(SimpleGrantedAuthority(Role.BUYER.role))
+        assertThat(authentication.authorities).contains(SimpleGrantedAuthority(Role.ADMIN.role))
     }
 
     @Test

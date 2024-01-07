@@ -5,6 +5,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Category
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.web.controller.dto.CategoryDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateCategoryRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateCategoryNameRequest
 import org.bson.types.ObjectId
@@ -63,13 +64,3 @@ class CategoryService(
     }
 }
 
-fun Category.toDTO(): CategoryDTO {
-    return CategoryDTO(
-        id = id.toString(),
-        parentCategoryId = parentCategoryId?.toString(),
-        name = name,
-        subcategoryIds = subcategoryIds.map { it.toString() }.toMutableList(),
-        creationDate = creationDate,
-        modifiedDate = modifiedDate
-    )
-}
