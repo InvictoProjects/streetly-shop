@@ -3,6 +3,7 @@ package com.invictoprojects.streetlyshop.service
 import com.invictoprojects.streetlyshop.persistence.MediaRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.media.Media
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
@@ -62,5 +63,4 @@ internal class MediaServiceTest {
         assertThat(mediaDTOs[0].url).isEqualTo("media.url")
     }
 
-    private fun <T> any(): T = Mockito.any()
 }

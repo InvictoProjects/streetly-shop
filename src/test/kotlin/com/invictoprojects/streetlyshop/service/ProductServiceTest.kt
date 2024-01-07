@@ -10,8 +10,8 @@ import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.util.capture
 import com.invictoprojects.streetlyshop.util.toAttribute
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateProductRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateProductRequest
 import com.invictoprojects.streetlyshop.web.exception.InvalidAttributeException

@@ -44,6 +44,7 @@ internal class AttributeValueServiceTest {
 
         attributeValueService.updateName(attributeValueId, request)
 
-        verify(attributeValueRepository).save(AttributeValue(attributeValueId, attributeId, ATTRIBUTE_VALUE_RED, Language.En))
+        verify(attributeValueRepository)
+            .save(AttributeValue(attributeValueId, attributeId, ATTRIBUTE_VALUE_RED, Language.En))
     }
 }

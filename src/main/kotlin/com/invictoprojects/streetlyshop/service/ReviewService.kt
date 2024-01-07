@@ -11,8 +11,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Review
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.ReviewDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AddReviewRequest
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service

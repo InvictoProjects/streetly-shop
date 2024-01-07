@@ -8,8 +8,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.content
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.util.toAttribute
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.ContentDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateContentRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateContentRequest
 import com.invictoprojects.streetlyshop.web.exception.UserNotAuthorizedException

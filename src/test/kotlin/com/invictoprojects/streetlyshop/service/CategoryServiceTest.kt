@@ -3,6 +3,8 @@ package com.invictoprojects.streetlyshop.service
 import com.invictoprojects.streetlyshop.persistence.CategoryRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Category
+import com.invictoprojects.streetlyshop.util.any
+import com.invictoprojects.streetlyshop.util.capture
 import com.invictoprojects.streetlyshop.web.controller.request.CreateCategoryRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateCategoryNameRequest
 import org.assertj.core.api.Assertions.assertThat
@@ -29,9 +31,16 @@ internal class CategoryServiceTest {
     @InjectMocks
     lateinit var categoryService: CategoryService
 
+    companion object {
+        private const val CATEGORY_NAME = "Dresses"
+        private const val CATEGORY_NAME_EN = "Clothes"
+        private const val CATEGORY_NAME_UA = "Одяг"
+        private const val CATEGORY_NAME_PL = "Odzież"
+    }
+
     @Test
     fun createCategory_categoryIsParent_categoryIsCreated() {
-        val request = CreateCategoryRequest(parentCategoryId = null, name = "Dresses")
+        val request = CreateCategoryRequest(parentCategoryId = null, name = CATEGORY_NAME)
 
         given(categoryRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Category>())
 
@@ -45,11 +54,15 @@ internal class CategoryServiceTest {
     @Test
     fun createCategory_categoryHasParent_categoryIsCreated() {
         val parentCategoryId = ObjectId()
-        val request = CreateCategoryRequest(parentCategoryId = parentCategoryId.toString(), name = "Dresses")
+        val request = CreateCategoryRequest(parentCategoryId = parentCategoryId.toString(), name = CATEGORY_NAME)
 
-        val englishParentCategory = Category(id = parentCategoryId, name = "Clothes", languageCode = Language.En)
-        val ukrainianParentCategory = Category(id = parentCategoryId, name = "Одяг", languageCode = Language.Ua)
-        val polishParentCategory = Category(id = parentCategoryId, name = "Odzież", languageCode = Language.Pl)
+        val englishParentCategory = Category(id = parentCategoryId, name = CATEGORY_NAME_EN, languageCode = Language.En)
+        val ukrainianParentCategory = Category(
+            id = parentCategoryId,
+            name = CATEGORY_NAME_UA,
+            languageCode = Language.Ua
+        )
+        val polishParentCategory = Category(id = parentCategoryId, name = CATEGORY_NAME_PL, languageCode = Language.Pl)
 
         given(categoryRepository.getById(parentCategoryId, Language.En)).willReturn(englishParentCategory)
         given(categoryRepository.getById(parentCategoryId, Language.Ua)).willReturn(ukrainianParentCategory)
@@ -66,12 +79,12 @@ internal class CategoryServiceTest {
 
     @Test
     fun updateName_requestIsValid_nameIsUpdated() {
-        val request = UpdateCategoryNameRequest("Сукня", Language.Ua)
+        val request = UpdateCategoryNameRequest(CATEGORY_NAME_UA, Language.Ua)
         val categoryId = ObjectId()
 
         val category = Category(
             id = categoryId,
-            name = "Dress",
+            name = CATEGORY_NAME,
             languageCode = Language.Ua
         )
         given(categoryRepository.getById(categoryId, Language.Ua)).willReturn(category)
@@ -93,7 +106,7 @@ internal class CategoryServiceTest {
 
         val category = Category(
             id = categoryId,
-            name = "Dress",
+            name = CATEGORY_NAME,
             parentCategoryId = null,
             languageCode = Language.En,
             subcategoryIds = mutableListOf(subcategoryId)
@@ -108,6 +121,4 @@ internal class CategoryServiceTest {
         assertThat(categoryDTO.subcategoryIds).isEqualTo(category.subcategoryIds.map { it.toString() })
     }
 
-    private fun <T> any(): T = Mockito.any()
-    private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
 }

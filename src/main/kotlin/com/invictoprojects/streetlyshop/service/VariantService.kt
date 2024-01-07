@@ -11,9 +11,9 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.util.toAttribute
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.util.toDecimal128
 import com.invictoprojects.streetlyshop.web.controller.dto.VariantDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateVariantRequest
 import com.invictoprojects.streetlyshop.web.exception.UserNotAuthorizedException
 import org.bson.types.ObjectId

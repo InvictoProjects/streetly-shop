@@ -7,7 +7,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribu
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeSearch
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeValue
 import com.invictoprojects.streetlyshop.util.any
-import com.invictoprojects.streetlyshop.util.toDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AttributeSearchRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.bson.types.ObjectId

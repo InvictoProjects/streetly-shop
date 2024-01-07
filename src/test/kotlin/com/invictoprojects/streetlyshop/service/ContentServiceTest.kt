@@ -11,8 +11,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.content
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
 import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.util.capture
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateContentRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateContentRequest
 import com.invictoprojects.streetlyshop.web.exception.InvalidAttributeException

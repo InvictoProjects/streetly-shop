@@ -6,6 +6,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Review
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AddReviewRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.bson.types.ObjectId
@@ -15,7 +17,6 @@ import org.mockito.AdditionalAnswers
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -47,7 +48,6 @@ internal class ReviewServiceTest {
 
     @Test
     fun addReview_requestIsValid_reviewIsAdded() {
-        // given
         val variantId = ObjectId()
         val contentId = ObjectId()
         val productId = ObjectId()
@@ -98,10 +98,8 @@ internal class ReviewServiceTest {
         )
         given(productRepository.getById(productId)).willReturn(product)
 
-        // when
         val reviewDTO = reviewService.addReview(request)
 
-        // then
         verify(productRepository).save(product)
 
         assertThat(reviewDTO.variantId).isEqualTo(variantId.toString())
@@ -117,5 +115,4 @@ internal class ReviewServiceTest {
         assertThat(product.reviewIds).hasSize(2)
     }
 
-    private fun <T> any(): T = Mockito.any()
 }

@@ -1,4 +1,4 @@
-package com.invictoprojects.streetlyshop.util;
+package com.invictoprojects.streetlyshop.util
 
 import org.bson.types.Decimal128
 import java.math.BigDecimal

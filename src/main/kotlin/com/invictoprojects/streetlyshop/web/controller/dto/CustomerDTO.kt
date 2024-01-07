@@ -1,5 +1,6 @@
 package com.invictoprojects.streetlyshop.web.controller.dto
 
+import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Gender
 import java.time.Instant
 
@@ -16,3 +17,18 @@ data class CustomerDTO(
     val email: String,
     val registeredAt: Instant
 )
+
+fun Customer.toDTO(): CustomerDTO {
+    return CustomerDTO(
+        id = id.toString(),
+        name = name,
+        surname = surname,
+        middleName = middleName,
+        avatar = avatar,
+        phone = phone,
+        birthDay = birthDay,
+        gender = gender, nickname = nickname,
+        email = email,
+        registeredAt = registeredAt
+    )
+}

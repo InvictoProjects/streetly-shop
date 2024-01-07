@@ -4,8 +4,8 @@ import com.invictoprojects.streetlyshop.persistence.MediaRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.media.Media
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.MediaDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile

@@ -5,8 +5,8 @@ import com.invictoprojects.streetlyshop.persistence.AttributeValueRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeDefinition
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.attribute.AttributeValue
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDefinitionDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.AddAttributeDefinitionRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateAttributeNameRequest
 import org.bson.types.ObjectId

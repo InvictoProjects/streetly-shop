@@ -4,8 +4,8 @@ import com.invictoprojects.streetlyshop.persistence.ExchangeRateRepository
 import com.invictoprojects.streetlyshop.persistence.VariantRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.Currency
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.ExchangeRateDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateExchangeRateRequest
 import com.invictoprojects.streetlyshop.web.exception.ExchangeRateNotFoundException
 import org.springframework.data.repository.findByIdOrNull

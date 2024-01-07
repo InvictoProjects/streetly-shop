@@ -14,6 +14,9 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.Product
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantInfo
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
+import com.invictoprojects.streetlyshop.util.capture
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateOrderRequest
 import com.invictoprojects.streetlyshop.web.controller.request.OrderLineRequest
 import org.assertj.core.api.Assertions.assertThat
@@ -27,7 +30,6 @@ import org.mockito.BDDMockito.given
 import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -104,10 +106,8 @@ internal class OrderServiceTest {
 
         given(orderRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Order>())
 
-        // when
         val orderDTO = orderService.createOrder(request)
 
-        // then
         verify(variantRepository).updateStock(variantId, -1)
         verify(orderRepository).save(capture(orderCaptor))
 
@@ -117,6 +117,4 @@ internal class OrderServiceTest {
         assertThat(orderDTO).isEqualTo(actualOrder.toDTO())
     }
 
-    private fun <T> any(): T = Mockito.any()
-    private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
 }

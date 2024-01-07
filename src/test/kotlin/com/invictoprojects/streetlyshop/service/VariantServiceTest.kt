@@ -54,7 +54,6 @@ internal class VariantServiceTest {
 
     @InjectMocks
     lateinit var variantService: VariantService
-    
     companion object {
         private const val BARCODE = "1231245"
     }

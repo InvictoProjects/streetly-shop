@@ -37,14 +37,19 @@ internal class FileServiceTest {
     @InjectMocks
     lateinit var fileService: FileService
 
+    companion object {
+        private const val CONTAINER_NAME = "avatars"
+        private const val FILE_NAME = "filename.jpg"
+    }
+
     @Test
     fun uploadFile_fileIsValid_fileIsUploaded() {
-        given(blobServiceClient.getBlobContainerClient("avatars")).willReturn(blobContainerClient)
-        given(blobContainerClient.getBlobClient("filename.jpg")).willReturn(blobClient)
+        given(blobServiceClient.getBlobContainerClient(CONTAINER_NAME)).willReturn(blobContainerClient)
+        given(blobContainerClient.getBlobClient(FILE_NAME)).willReturn(blobClient)
         given(blobClient.blockBlobClient).willReturn(blockBlobClient)
         given(blockBlobClient.blobUrl).willReturn("url")
 
-        val url = fileService.uploadFile(File(data, "filename.jpg"), "avatars")
+        val url = fileService.uploadFile(File(data, FILE_NAME), CONTAINER_NAME)
 
         assertThat(url).isEqualTo("url")
         verify(blockBlobClient).deleteIfExists()
@@ -53,12 +58,12 @@ internal class FileServiceTest {
 
     @Test
     fun uploadFile_clientThrowsException_exceptionIsThrown() {
-        given(blobServiceClient.getBlobContainerClient("avatars")).willReturn(blobContainerClient)
-        given(blobContainerClient.getBlobClient("filename.jpg")).willReturn(blobClient)
+        given(blobServiceClient.getBlobContainerClient(CONTAINER_NAME)).willReturn(blobContainerClient)
+        given(blobContainerClient.getBlobClient(FILE_NAME)).willReturn(blobClient)
         given(blobClient.blockBlobClient).willReturn(blockBlobClient)
         given(blockBlobClient.upload(data, true)).willThrow(RuntimeException())
 
-        val throwable = catchThrowable { fileService.uploadFile(File(data, "filename.jpg"), "avatars") }
+        val throwable = catchThrowable { fileService.uploadFile(File(data, FILE_NAME), CONTAINER_NAME) }
 
         assertThat(throwable).isInstanceOf(RuntimeException::class.java)
         verify(blockBlobClient).deleteIfExists()
@@ -66,11 +71,11 @@ internal class FileServiceTest {
 
     @Test
     fun deleteFile_fileIsDeleted() {
-        given(blobServiceClient.getBlobContainerClient("avatars")).willReturn(blobContainerClient)
-        given(blobContainerClient.getBlobClient("filename.jpg")).willReturn(blobClient)
+        given(blobServiceClient.getBlobContainerClient(CONTAINER_NAME)).willReturn(blobContainerClient)
+        given(blobContainerClient.getBlobClient(FILE_NAME)).willReturn(blobClient)
         given(blobClient.blockBlobClient).willReturn(blockBlobClient)
 
-        fileService.deleteFile("filename.jpg", "avatars")
+        fileService.deleteFile(FILE_NAME, CONTAINER_NAME)
 
         verify(blockBlobClient).deleteIfExists()
     }

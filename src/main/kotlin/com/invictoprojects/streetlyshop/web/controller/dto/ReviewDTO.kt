@@ -1,5 +1,6 @@
 package com.invictoprojects.streetlyshop.web.controller.dto
 
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.Review
 import java.time.Instant
 
 data class ReviewDTO(
@@ -15,3 +16,19 @@ data class ReviewDTO(
     val text: String,
     val rating: Int
 )
+
+fun Review.toDTO(): ReviewDTO {
+    return ReviewDTO(
+        id = id.toString(),
+        productId = productId.toString(),
+        contentId = contentId.toString(),
+        variantId = variantId.toString(),
+        createdBy = createdBy.toString(),
+        customerName = customerName,
+        customerAvatar = customerAvatar,
+        creationDate = creationDate,
+        medias = medias.map { it.toDTO() }.toMutableList(),
+        text = text,
+        rating = rating
+    )
+}

@@ -1,5 +1,6 @@
 package com.invictoprojects.streetlyshop.web.controller.dto
 
+import com.invictoprojects.streetlyshop.persistence.domain.model.product.Category
 import java.time.Instant
 
 data class CategoryDTO(
@@ -10,3 +11,14 @@ data class CategoryDTO(
     var creationDate: Instant,
     val modifiedDate: Instant
 )
+
+fun Category.toDTO(): CategoryDTO {
+    return CategoryDTO(
+        id = id.toString(),
+        parentCategoryId = parentCategoryId?.toString(),
+        name = name,
+        subcategoryIds = subcategoryIds.map { it.toString() }.toMutableList(),
+        creationDate = creationDate,
+        modifiedDate = modifiedDate
+    )
+}

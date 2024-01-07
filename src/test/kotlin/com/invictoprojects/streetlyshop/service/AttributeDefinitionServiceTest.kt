@@ -42,7 +42,7 @@ internal class AttributeDefinitionServiceTest {
         private val sizeAttributeValues = mutableListOf("S", "M", "L")
         private const val COLOR_ATTRIBUTE = "Color"
         private const val FARBE_ATTRIBUTE = "Farbe"
-        private const val COLOR_ATTRIBUTE_VALUE = "Blue";
+        private const val COLOR_ATTRIBUTE_VALUE = "Blue"
     }
 
     @Test
@@ -98,7 +98,14 @@ internal class AttributeDefinitionServiceTest {
             name = COLOR_ATTRIBUTE,
             languageCode = Language.En,
             valueIds = listOf(ObjectId(valueId)),
-            values = listOf(AttributeValue(ObjectId(valueId), ObjectId(attributeDefinitionId), COLOR_ATTRIBUTE_VALUE, Language.En))
+            values = listOf(
+                AttributeValue(
+                    ObjectId(valueId),
+                    ObjectId(attributeDefinitionId),
+                    COLOR_ATTRIBUTE_VALUE,
+                    Language.En
+                )
+            )
         )
         given(attributeDefinitionRepository.getByIdAggregated(ObjectId(attributeDefinitionId), Language.En))
             .willReturn(attributeDefinition)

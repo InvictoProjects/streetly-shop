@@ -10,9 +10,8 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderLine
 import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderStatus
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
-import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.OrderDTO
-import com.invictoprojects.streetlyshop.web.controller.dto.OrderLineDTO
+import com.invictoprojects.streetlyshop.web.controller.dto.toDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateOrderRequest
 import com.invictoprojects.streetlyshop.web.controller.request.OrderLineRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateOrderStatusRequest
