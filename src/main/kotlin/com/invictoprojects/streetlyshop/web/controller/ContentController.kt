@@ -8,7 +8,13 @@ import com.invictoprojects.streetlyshop.web.controller.request.UpdateContentRequ
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @Api("Content Controller")
@@ -27,8 +33,8 @@ class ContentController(
     @ApiOperation("Update content")
     @PutMapping("{id}")
     fun updateContent(
-            @PathVariable id: String,
-            @Valid @RequestBody request: UpdateContentRequest
+        @PathVariable id: String,
+        @Valid @RequestBody request: UpdateContentRequest
     ): ContentDTO =
             contentService.updateContent(id, request)
 

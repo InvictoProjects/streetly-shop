@@ -109,9 +109,13 @@ class DefaultCorsConfigurationSource : CorsConfigurationSource {
         config.allowedMethods = listOf("*")
         config.allowedHeaders = listOf("*")
         config.exposedHeaders = listOf("*")
-        config.maxAge = 3600
+        config.maxAge = MAX_AGE
 
         return config
+    }
+
+    companion object {
+        const val MAX_AGE = 3600L
     }
 
 }

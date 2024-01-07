@@ -3,7 +3,11 @@ package com.invictoprojects.streetlyshop.web.controller.request
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.VariantMedia
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
 import java.math.BigDecimal
-import javax.validation.constraints.*
+import javax.validation.constraints.DecimalMin
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 data class CreateVariantRequest(
     @field:NotBlank

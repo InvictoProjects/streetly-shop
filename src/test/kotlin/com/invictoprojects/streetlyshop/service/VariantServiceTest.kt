@@ -3,7 +3,7 @@ package com.invictoprojects.streetlyshop.service
 import com.mongodb.assertions.Assertions.assertTrue
 import com.invictoprojects.streetlyshop.persistence.ContentRepository
 import com.invictoprojects.streetlyshop.persistence.VariantRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.content.Content
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.Variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
@@ -19,13 +19,18 @@ import org.bson.types.Decimal128
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
+import org.mockito.Mockito.never
+import org.mockito.Mockito.times
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import java.math.BigDecimal
-import java.util.*
 
 
 @ExtendWith(MockitoExtension::class)
@@ -61,7 +66,8 @@ internal class VariantServiceTest {
             stockQuantity = 10
         )
 
-        given(attributeService.validateAttributes(mutableListOf(attribute))).willThrow(InvalidAttributeException("Error"))
+        given(attributeService.validateAttributes(mutableListOf(attribute)))
+            .willThrow(InvalidAttributeException("Error"))
 
         val throwable = catchThrowable { variantService.createVariant(request) }
 
@@ -156,7 +162,11 @@ internal class VariantServiceTest {
         assertThat(variantDTO.productId).isEqualTo(productId.toString())
         assertThat(variantDTO.attributes).isEqualTo(request.attributes)
         assertThat(variantDTO.medias).isEqualTo(request.medias)
-        assertTrue(variantDTO.prices.all { (_, price) -> price.originalPrice == BigDecimal.TEN && price.salePrice == BigDecimal.ONE })
+        assertTrue(
+            variantDTO.prices.all { (_, price) ->
+                price.originalPrice == BigDecimal.TEN && price.salePrice == BigDecimal.ONE
+            }
+        )
         assertThat(variantDTO.stock.quantity).isEqualTo(10)
     }
 

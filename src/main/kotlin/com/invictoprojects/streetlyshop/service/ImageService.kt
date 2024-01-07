@@ -17,7 +17,7 @@ import javax.imageio.ImageIO
 class ImageService {
 
     fun toAvatar(file: MultipartFile, userId: ObjectId): File {
-        val bufferedImage = Scalr.resize(cropImage(file.inputStream), 64)
+        val bufferedImage = Scalr.resize(cropImage(file.inputStream), TARGET_SIZE)
         val outputStream = ByteArrayOutputStream()
         ImageIO.write(bufferedImage, file.getExtension(), outputStream)
 
@@ -41,6 +41,10 @@ class ImageService {
 
     private fun getUpperLeftCornerX(width: Int, squareSize: Int) = width / 2 - squareSize / 2
     private fun getUpperLeftCornerY(height: Int, squareSize: Int) = height / 2 - squareSize / 2
+
+    companion object {
+        const val TARGET_SIZE = 64
+    }
 }
 
 fun MultipartFile.getExtension(): String = FilenameUtils.getExtension(originalFilename!!)

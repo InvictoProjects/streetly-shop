@@ -64,7 +64,8 @@ internal class JWTAuthenticationFilterTest {
         doFilterInternal.isAccessible = true
         doFilterInternal.invoke(jwtAuthenticationFilter, request, response, filterChain)
 
-        AssertionsForInterfaceTypes.assertThat(SecurityContextHolder.getContext().authentication).isEqualTo(authentication)
+        AssertionsForInterfaceTypes.assertThat(SecurityContextHolder.getContext().authentication)
+            .isEqualTo(authentication)
     }
 
     @Test

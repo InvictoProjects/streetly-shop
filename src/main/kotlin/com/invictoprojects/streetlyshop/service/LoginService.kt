@@ -11,6 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 @Service
 class LoginService(
@@ -36,7 +37,7 @@ class LoginService(
 
     private fun getRefreshTokenCookie(userId: ObjectId): ResponseCookie {
         val refreshToken = jwtService.getRefreshToken(userId)
-        val maxAge = (refreshToken.expiration.time - Date().time) / 1000
+        val maxAge = TimeUnit.MILLISECONDS.toSeconds((refreshToken.expiration.time - Date().time))
         return ResponseCookie
             .from("refreshToken", refreshToken.token)
             .httpOnly(true)

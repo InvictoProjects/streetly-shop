@@ -88,7 +88,8 @@ internal class LoginServiceTest {
         val userId = ObjectId()
         val refreshToken = "refreshToken"
 
-        BDDMockito.given(jwtService.validateRefreshToken(userId, refreshToken)).willThrow(InvalidRefreshTokenException::class.java)
+        BDDMockito.given(jwtService.validateRefreshToken(userId, refreshToken))
+            .willThrow(InvalidRefreshTokenException::class.java)
 
         val throwable = Assertions.catchThrowable { loginService.refresh(userId, refreshToken) }
 

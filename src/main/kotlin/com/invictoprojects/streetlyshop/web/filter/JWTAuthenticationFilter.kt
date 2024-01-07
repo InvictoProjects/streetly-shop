@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.invictoprojects.streetlyshop.service.JWTService
 import com.invictoprojects.streetlyshop.web.config.SecurityConfig
 import com.invictoprojects.streetlyshop.web.controller.response.ErrorResponse
+import io.jsonwebtoken.JwtException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
@@ -24,7 +25,7 @@ class JWTAuthenticationFilter(private val jwtService: JWTService) : OncePerReque
             try {
                 val authentication = jwtService.authenticate(token)
                 SecurityContextHolder.getContext().authentication = authentication
-            } catch (jwtException: RuntimeException) {
+            } catch (jwtException: JwtException) {
                 handleInvalidToken(jwtException, response)
                 return
             }
@@ -33,7 +34,7 @@ class JWTAuthenticationFilter(private val jwtService: JWTService) : OncePerReque
         filterChain.doFilter(request, response)
     }
 
-    private fun handleInvalidToken(jwtException: RuntimeException, response: HttpServletResponse) {
+    private fun handleInvalidToken(jwtException: JwtException, response: HttpServletResponse) {
         val errorResponse = ErrorResponse("Token is invalid", mutableListOf(jwtException.toString()))
 
         response.contentType = "application/json"

@@ -17,7 +17,7 @@ class DefaultAttributeValueRepository(
         @Value("\${mongodb.collection.attribute-values}")
         val attributeValuesPrefix: String,
         val mongoTemplate: MongoTemplate
-) : com.invictoprojects.streetlyshop.persistence.AttributeValueRepository {
+) : AttributeValueRepository {
 
     override fun save(attributeValue: AttributeValue): AttributeValue {
         val collection = getCollection(attributeValuesPrefix, attributeValue.languageCode)

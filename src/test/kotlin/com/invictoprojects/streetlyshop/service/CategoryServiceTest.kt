@@ -1,7 +1,7 @@
 package com.invictoprojects.streetlyshop.service
 
 import com.invictoprojects.streetlyshop.persistence.CategoryRepository
-import com.invictoprojects.streetlyshop.persistence.domain.model.*
+import com.invictoprojects.streetlyshop.persistence.domain.model.Language
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.Category
 import com.invictoprojects.streetlyshop.web.controller.request.CreateCategoryRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateCategoryNameRequest
@@ -9,9 +9,14 @@ import org.assertj.core.api.Assertions.assertThat
 import org.bson.types.ObjectId
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.*
+import org.mockito.AdditionalAnswers
+import org.mockito.ArgumentCaptor
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.*
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 
 
