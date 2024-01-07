@@ -26,8 +26,8 @@ import org.mockito.Captor
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.spy
 import org.mockito.Mockito.never
+import org.mockito.Mockito.spy
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoInteractions
@@ -67,7 +67,7 @@ internal class ContentServiceTest {
         )
 
         given(attributeService.validateAttributes(mutableListOf(attribute)))
-            .willThrow(InvalidAttributeException("Error"))
+                .willThrow(InvalidAttributeException("Error"))
 
         val throwable = catchThrowable { contentService.createContent(request) }
 
@@ -248,7 +248,6 @@ internal class ContentServiceTest {
         given(authenticationFacade.getAuthentication()).willReturn(authentication)
 
         given(contentRepository.save(any())).willAnswer(AdditionalAnswers.returnsFirstArg<Content>())
-
 
         // when
         val contentDTO = contentService.updateContent(contentId.toString(), request)
