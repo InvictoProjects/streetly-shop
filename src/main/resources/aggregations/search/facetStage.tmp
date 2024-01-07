@@ -1,0 +1,19 @@
+{
+  $facet: {
+    totalCount: [
+      %{searchPipeline},
+      {
+        $count: "count"
+      }
+    ],
+    paginatedResults: [
+      %{searchPipeline},
+      {
+        $skip: %{skip}
+      },
+      {
+        $limit: %{limit}
+      }
+    ]
+  }
+}
