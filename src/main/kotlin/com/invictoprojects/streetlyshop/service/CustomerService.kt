@@ -5,7 +5,6 @@ import com.invictoprojects.streetlyshop.persistence.ProductRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Customer
 import com.invictoprojects.streetlyshop.persistence.domain.model.customer.Role
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
-import com.invictoprojects.streetlyshop.web.controller.dto.CustomerDTO
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateCustomerDetailsRequest
 import com.invictoprojects.streetlyshop.web.controller.response.ImageUploadResponse
 import com.invictoprojects.streetlyshop.web.exception.UserAlreadyRegisteredException
@@ -102,19 +101,4 @@ class CustomerService(
             productRepository.decreaseFavoriteCount(productId)
         }
     }
-}
-
-fun Customer.toDTO(): CustomerDTO {
-    return CustomerDTO(
-        id = id.toString(),
-        name = name,
-        surname = surname,
-        middleName = middleName,
-        avatar = avatar,
-        phone = phone,
-        birthDay = birthDay,
-        gender = gender, nickname = nickname,
-        email = email,
-        registeredAt = registeredAt
-    )
 }
