@@ -4,6 +4,7 @@ import com.invictoprojects.streetlyshop.persistence.MediaRepository
 import com.invictoprojects.streetlyshop.persistence.domain.model.media.Media
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.toDTO
 import com.invictoprojects.streetlyshop.web.controller.dto.MediaDTO
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
@@ -35,11 +36,3 @@ class MediaService(
     }
 }
 
-fun Media.toDTO(): MediaDTO {
-    return MediaDTO(
-        id = id.toString(),
-        url = url,
-        uploadedBy = uploadedBy.toString(),
-        uploadDate = uploadDate
-    )
-}
