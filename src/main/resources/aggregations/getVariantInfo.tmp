@@ -1,0 +1,10 @@
+[
+{$match: {"_id": ObjectId("%{variantId}")}},
+{$lookup: {from: "%{productsCollection}", localField: "productId", foreignField: "_id", as: "products"}},
+{ $set: {"product": {$arrayElemAt: [ "$products", 0 ]}}},
+{ $unset: "products"},
+{ $lookup: {from: "%{contentsCollection}", localField: "contentId", foreignField: "_id", as: "contents"}},
+{ $set: {"content": {$arrayElemAt: [ "$contents", 0 ]}}},
+ {$replaceRoot: { "newRoot": { $mergeObjects: [ "$content", {"product": "$product"}, {"variants": "$$ROOT"}] }}},
+{ $set: {"contentId": "$_id"}}
+]
