@@ -9,6 +9,7 @@ import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant
 import com.invictoprojects.streetlyshop.persistence.domain.model.product.variant.price.ExchangeRate
 import com.invictoprojects.streetlyshop.persistence.impl.toObjectId
 import com.invictoprojects.streetlyshop.service.facade.AuthenticationFacade
+import com.invictoprojects.streetlyshop.util.any
 import com.invictoprojects.streetlyshop.web.controller.dto.AttributeDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateVariantRequest
 import com.invictoprojects.streetlyshop.web.exception.InvalidAttributeException
@@ -53,13 +54,17 @@ internal class VariantServiceTest {
 
     @InjectMocks
     lateinit var variantService: VariantService
+    
+    companion object {
+        private const val BARCODE = "1231245"
+    }
 
     @Test
     fun createVariant_attributeIsNotValid_exceptionIsThrown() {
         val attribute = AttributeDTO(id = ObjectId().toString(), valueId = ObjectId().toString())
         val request = CreateVariantRequest(
             contentId = "6460ca81e6192a239603be01",
-            barcode = "1231245",
+            barcode = BARCODE,
             attributes = mutableListOf(attribute),
             salePriceUAH = BigDecimal.ONE,
             originalPriceUAH = BigDecimal.TEN,
@@ -82,7 +87,7 @@ internal class VariantServiceTest {
         val contentId = ObjectId()
         val request = CreateVariantRequest(
             contentId = contentId.toString(),
-            barcode = "1231245",
+            barcode = BARCODE,
             attributes = mutableListOf(attribute),
             salePriceUAH = BigDecimal.ONE,
             originalPriceUAH = BigDecimal.TEN,
@@ -104,17 +109,17 @@ internal class VariantServiceTest {
 
     @Test
     fun createVariant_requestIsValid_variantIsCreated() {
-        // given
+        val stockQuantity = 10L
         val attribute = AttributeDTO(id = ObjectId().toString(), valueId = ObjectId().toString())
         val contentId = ObjectId().toString()
         val productId = ObjectId()
         val request = CreateVariantRequest(
             contentId = contentId,
-            barcode = "1231245",
+            barcode = BARCODE,
             attributes = mutableListOf(attribute),
             salePriceUAH = BigDecimal.ONE,
             originalPriceUAH = BigDecimal.TEN,
-            stockQuantity = 10
+            stockQuantity = stockQuantity
         )
 
         val currentUserId = ObjectId()
@@ -151,10 +156,8 @@ internal class VariantServiceTest {
 
         given(exchangeRateService.getByCurrency(any())).willReturn(ExchangeRate(id = "UAH-UAH", rate = Decimal128(1)))
 
-        // when
         val variantDTO = variantService.createVariant(request)
 
-        // then
         verify(contentRepository, times(Language.values().size)).save(any())
 
         assertThat(variantDTO.barcode).isEqualTo(request.barcode)
@@ -167,7 +170,7 @@ internal class VariantServiceTest {
                 price.originalPrice == BigDecimal.TEN && price.salePrice == BigDecimal.ONE
             }
         )
-        assertThat(variantDTO.stock.quantity).isEqualTo(10)
+        assertThat(variantDTO.stock.quantity).isEqualTo(stockQuantity)
     }
 
     @Test
@@ -200,5 +203,4 @@ internal class VariantServiceTest {
         verify(variantRepository).updateStock(variantId, stockDelta)
     }
 
-    private fun <T> any(): T = Mockito.any()
 }
