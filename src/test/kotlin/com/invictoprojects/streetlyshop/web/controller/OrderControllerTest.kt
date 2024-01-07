@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.invictoprojects.streetlyshop.persistence.domain.model.order.OrderStatus
 import com.invictoprojects.streetlyshop.service.OrderService
 import com.invictoprojects.streetlyshop.service.ResourceReader
-import com.invictoprojects.streetlyshop.web.controller.dto.*
+import com.invictoprojects.streetlyshop.web.controller.dto.OrderDTO
 import com.invictoprojects.streetlyshop.web.controller.request.CreateOrderRequest
 import com.invictoprojects.streetlyshop.web.controller.request.OrderLineRequest
 import com.invictoprojects.streetlyshop.web.controller.request.UpdateOrderStatusRequest
@@ -21,7 +21,9 @@ import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 

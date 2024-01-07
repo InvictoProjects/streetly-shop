@@ -29,8 +29,4 @@ data class Content(
         return this
     }
 
-    fun addVariants(variants: List<Variant>): Content {
-        this.variants.addAll(variants)
-        return this
-    }
 }
