@@ -23,11 +23,16 @@ internal class AttributeServiceTest {
     @InjectMocks
     lateinit var attributeService: AttributeService
 
+    companion object {
+        private const val SIZE_S = "S"
+        private const val SIZE_M = "M"
+    }
+
     @Test
     fun validateAttributes_attributesAreValid_ok() {
         val attributeId = ObjectId()
-        val attributeValueS = AttributeValue(ObjectId(), attributeId, "S", Language.En)
-        val attributeValueM = AttributeValue(ObjectId(), attributeId, "M", Language.En)
+        val attributeValueS = AttributeValue(ObjectId(), attributeId, SIZE_S, Language.En)
+        val attributeValueM = AttributeValue(ObjectId(), attributeId, SIZE_M, Language.En)
 
         given(attributeValueService.getById(attributeValueS.id)).willReturn(attributeValueS)
         given(attributeValueService.getById(attributeValueM.id)).willReturn(attributeValueM)
@@ -42,8 +47,8 @@ internal class AttributeServiceTest {
     @Test
     fun validateAttributes_attributesAreNotValid_exceptionIsThrown() {
         val attributeId = ObjectId()
-        val attributeValueS = AttributeValue(ObjectId(), attributeId, "S", Language.En)
-        val attributeValueM = AttributeValue(ObjectId(), attributeId, "M", Language.En)
+        val attributeValueS = AttributeValue(ObjectId(), attributeId, SIZE_S, Language.En)
+        val attributeValueM = AttributeValue(ObjectId(), attributeId, SIZE_M, Language.En)
 
         given(attributeValueService.getById(attributeValueS.id)).willReturn(attributeValueS)
 

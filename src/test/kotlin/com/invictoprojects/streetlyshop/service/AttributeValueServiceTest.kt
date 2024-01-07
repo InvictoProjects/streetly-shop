@@ -23,22 +23,27 @@ internal class AttributeValueServiceTest {
     @InjectMocks
     lateinit var attributeValueService: AttributeValueService
 
+    companion object {
+        private const val ATTRIBUTE_VALUE_RED = "RED"
+        private const val ATTRIBUTE_VALUE_LRED = "Light Red"
+    }
+
     @Test
     fun updateName_attributeValueIsPresent_nameIsUpdated() {
-        val request = UpdateAttributeValueNameRequest("Red", Language.En)
+        val request = UpdateAttributeValueNameRequest(ATTRIBUTE_VALUE_RED, Language.En)
         val attributeValueId = ObjectId()
         val attributeId = ObjectId()
 
         val attributeValue = AttributeValue(
             id = attributeValueId,
             attributeId = attributeId,
-            name = "Light Red",
+            name = ATTRIBUTE_VALUE_LRED,
             languageCode = Language.En
         )
         given(attributeValueRepository.getById(attributeValueId, Language.En)).willReturn(attributeValue)
 
         attributeValueService.updateName(attributeValueId, request)
 
-        verify(attributeValueRepository).save(AttributeValue(attributeValueId, attributeId, "Red", Language.En))
+        verify(attributeValueRepository).save(AttributeValue(attributeValueId, attributeId, ATTRIBUTE_VALUE_RED, Language.En))
     }
 }
